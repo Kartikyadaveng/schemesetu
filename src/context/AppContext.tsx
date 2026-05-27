@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useRef, ReactNode, useCallback } from 'react';
 import { DUMMY_SCHEMES, type Scheme } from '../constants/dummyData';
+import allSchemesData from '../data/schemes.json';
 import { type Lang } from '../constants/strings';
 import { initFirebase, isFirebaseReady, getAuthInstance, onAuthChange, handleRedirectResult } from '../services/firebase';
 import * as firestore from '../services/firestoreService';
@@ -499,7 +500,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // ── Scheme Methods ──────────────────────────────────────────────────────
 
-  const getSchemeById = (id: string) => DUMMY_SCHEMES.find(s => s.id === id);
+  const ALL_SCHEMES = (Array.isArray(allSchemesData) ? allSchemesData : DUMMY_SCHEMES) as Scheme[];
+
+  const getSchemeById = (id: string) => ALL_SCHEMES.find(s => s.id === id);
 
   return (
     <AppContext.Provider
@@ -525,7 +528,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         savedSchemes,
         toggleSave,
         isSaved,
-        schemes: DUMMY_SCHEMES,
+        schemes: ALL_SCHEMES,
         getSchemeById,
         unreadCount,
         setUnreadCount,

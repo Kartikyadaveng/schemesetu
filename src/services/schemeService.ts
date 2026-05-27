@@ -1,59 +1,41 @@
-// ============================================================
-// SchemeSetu - Scheme Service
-// Provides scheme data — tries Firestore first, falls back to dummy data
-// ============================================================
-
-import { DUMMY_SCHEMES } from '../constants/dummyData';
-import * as firestore from './firestoreService';
-import { isFirebaseReady } from './firebase';
-import { calculateMatch, getEligibilityColor, getEligibilityBg } from './eligibilityEngine';
 import type { Scheme, CategoryStats } from './firestoreService';
-import type { MatchResult } from './eligibilityEngine';
+import type { MatchBreakdown as MatchResult, AnswerMap } from '../types/eligibility';
+import { calculateStrictMatch, getMatchColor, getMatchBg } from './eligibilityEngine';
+import { isFirebaseReady } from './firebase';
+import * as firestore from './firestoreService';
+
+import schemeData from '../data/schemes.json';
 
 export type { MatchResult };
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
-
-function convertDummyToScheme(d: typeof DUMMY_SCHEMES[0]): Scheme {
-  return {
-    id: d.id,
-    name: d.name,
-    nameHindi: d.nameHindi,
-    ministry: d.ministry,
-    category: d.category,
-    categories: d.categories || [d.category],
-    shortDesc: d.shortDesc,
-    description: d.description,
-    benefits: d.benefits,
-    eligibility: d.eligibility,
-    documents: d.documents,
-    deadline: d.deadline,
-    amount: d.amount || '',
-    isNew: d.isNew || false,
-    isPopular: d.isPopular || false,
-    applicationUrl: d.applicationUrl,
-    officialLink: d.officialLink || d.applicationUrl,
-    ministryLink: d.ministryLink || '',
-    verificationStatus: d.verificationStatus || 'unverified',
-    tags: d.tags,
-    state: 'Central',
-    searchKeywords: [d.name.toLowerCase()],
-  };
-}
 
 export interface ScoredScheme {
   scheme: Scheme;
   match: MatchResult;
 }
 
-// ── Public API ───────────────────────────────────────────────────────────────
+const ALL_SCHEMES: Scheme[] = (Array.isArray(schemeData) ? schemeData : []) as Scheme[];
+
+function getByIdFallback(id: string): Scheme | undefined {
+  return ALL_SCHEMES.find(s => s.id === id);
+}
+
+function searchFallback(query: string): Scheme[] {
+  const q = query.toLowerCase();
+  return ALL_SCHEMES.filter(s =>
+    s.name.toLowerCase().includes(q) ||
+    s.shortDesc.toLowerCase().includes(q) ||
+    s.category.toLowerCase().includes(q) ||
+    (s.categories || []).some(c => c.toLowerCase().includes(q)) ||
+    s.tags.some(t => t.toLowerCase().includes(q))
+  );
+}
 
 export async function getAllSchemes(): Promise<Scheme[]> {
   if (isFirebaseReady()) {
     const result = await firestore.getAllSchemes();
     if (result.schemes.length > 0) return result.schemes;
   }
-  return DUMMY_SCHEMES.map(convertDummyToScheme);
+  return ALL_SCHEMES;
 }
 
 export async function getSchemeById(id: string): Promise<Scheme | undefined> {
@@ -61,8 +43,7 @@ export async function getSchemeById(id: string): Promise<Scheme | undefined> {
     const result = await firestore.getSchemeById(id);
     if (result) return result;
   }
-  const dummy = DUMMY_SCHEMES.find(s => s.id === id);
-  return dummy ? convertDummyToScheme(dummy) : undefined;
+  return getByIdFallback(id);
 }
 
 export async function searchSchemes(query: string): Promise<Scheme[]> {
@@ -70,16 +51,7 @@ export async function searchSchemes(query: string): Promise<Scheme[]> {
     const result = await firestore.searchSchemes(query);
     if (result.length > 0) return result;
   }
-  const q = query.toLowerCase();
-  return DUMMY_SCHEMES
-    .filter(s =>
-      s.name.toLowerCase().includes(q) ||
-      s.shortDesc.toLowerCase().includes(q) ||
-      s.category.toLowerCase().includes(q) ||
-      (s.categories || []).some(c => c.toLowerCase().includes(q)) ||
-      s.tags.some(t => t.toLowerCase().includes(q))
-    )
-    .map(convertDummyToScheme);
+  return searchFallback(query);
 }
 
 export async function getSchemesByCategory(category: string): Promise<Scheme[]> {
@@ -87,9 +59,9 @@ export async function getSchemesByCategory(category: string): Promise<Scheme[]> 
     const result = await firestore.getSchemesByCategory(category);
     if (result.schemes.length > 0) return result.schemes;
   }
-  return DUMMY_SCHEMES
-    .filter(s => s.categories?.includes(category) || s.category === category)
-    .map(convertDummyToScheme);
+  return ALL_SCHEMES.filter(s =>
+    (s.categories || [s.category]).includes(category)
+  );
 }
 
 export async function getFeaturedSchemes(): Promise<Scheme[]> {
@@ -97,9 +69,7 @@ export async function getFeaturedSchemes(): Promise<Scheme[]> {
     const result = await firestore.getFeaturedSchemes();
     if (result.length > 0) return result;
   }
-  return DUMMY_SCHEMES
-    .filter(s => s.isNew || s.isPopular)
-    .map(convertDummyToScheme);
+  return ALL_SCHEMES.filter(s => s.isNew || s.isPopular);
 }
 
 export async function getNewSchemes(): Promise<Scheme[]> {
@@ -107,9 +77,7 @@ export async function getNewSchemes(): Promise<Scheme[]> {
     const result = await firestore.getNewSchemes();
     if (result.length > 0) return result;
   }
-  return DUMMY_SCHEMES
-    .filter(s => s.isNew)
-    .map(convertDummyToScheme);
+  return ALL_SCHEMES.filter(s => s.isNew);
 }
 
 export async function getStats() {
@@ -143,7 +111,7 @@ export async function getCategories(): Promise<CategoryStats[]> {
     if (result.some(c => c.count > 0)) return result;
   }
   const counts: Record<string, number> = {};
-  DUMMY_SCHEMES.forEach(s => {
+  ALL_SCHEMES.forEach(s => {
     const cats = s.categories || [s.category];
     cats.forEach(c => { counts[c] = (counts[c] || 0) + 1; });
   });
@@ -177,11 +145,9 @@ export async function getBookmarkedSchemes(userId: string): Promise<Scheme[]> {
   return [];
 }
 
-/**
- * Score all schemes against the user profile using the eligibility engine
- */
 export async function getScoredSchemes(
-  profile?: { occupation?: string; details?: Record<string, string> },
+  occupation?: string,
+  answers?: AnswerMap,
   matchLimit = 50
 ): Promise<ScoredScheme[]> {
   let all: Scheme[] = [];
@@ -190,12 +156,12 @@ export async function getScoredSchemes(
     if (fromFs.schemes.length > 0) all = fromFs.schemes;
   }
   if (all.length === 0) {
-    all = DUMMY_SCHEMES.map(convertDummyToScheme);
+    all = ALL_SCHEMES;
   }
 
   const scored = all.map(scheme => ({
     scheme,
-    match: calculateMatch(
+    match: calculateStrictMatch(
       {
         eligibleStates: scheme.eligibleStates,
         eligibleOccupations: scheme.eligibleOccupations,
@@ -204,10 +170,12 @@ export async function getScoredSchemes(
         eligibleCategories: scheme.eligibleCategories,
         minimumMarks: scheme.minimumMarks,
         genderEligibility: scheme.genderEligibility,
-        ageRange: scheme.ageRange,
+        minAge: scheme.ageRange?.min,
+        maxAge: scheme.ageRange?.max,
         disabilityEligible: scheme.disabilityEligible,
       },
-      { occupation: profile?.occupation, details: profile?.details }
+      occupation,
+      answers || {},
     ),
   }));
 
@@ -215,36 +183,22 @@ export async function getScoredSchemes(
   return scored.slice(0, matchLimit);
 }
 
-/**
- * Get top recommended schemes based on eligibility score
- */
 export async function getRecommendedSchemes(
   occupation?: string,
-  details?: Record<string, string>,
+  answers?: AnswerMap,
   count = 6
 ): Promise<Scheme[]> {
-  const scored = await getScoredSchemes(
-    occupation ? { occupation, details } : undefined,
-    count * 2
-  );
-  return scored.slice(0, count).map(s => s.scheme);
+  const scored = await getScoredSchemes(occupation, answers, count);
+  return scored.map(s => s.scheme);
 }
 
-/**
- * Get schemes with match scores for a category, sorted by eligibility
- */
 export async function getSchemesByCategoryWithScore(
   category: string,
-  profile?: { occupation?: string; details?: Record<string, string> }
+  occupation?: string,
+  answers?: AnswerMap
 ): Promise<ScoredScheme[]> {
-  const all = await getScoredSchemes(profile);
+  const all = await getScoredSchemes(occupation, answers);
   return all.filter(s => (s.scheme.categories || [s.scheme.category]).includes(category));
 }
 
-export function getMatchColor(match: MatchResult): string {
-  return getEligibilityColor(match.label);
-}
-
-export function getMatchBg(match: MatchResult): string {
-  return getEligibilityBg(match.label);
-}
+export { getMatchColor, getMatchBg };

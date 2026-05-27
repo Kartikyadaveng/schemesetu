@@ -6,7 +6,10 @@ import { SchemeCard } from '../components/ui/SchemeCard';
 import { SchemeCardSkeleton } from '../components/ui/Skeleton';
 import { CATEGORY_COLORS } from '../constants/colors';
 import { motion } from 'framer-motion';
-import { getSchemesByCategoryWithScore } from '../services/schemeService';
+import {
+  getSchemesByCategoryWithScore,
+  getMatchColor, getMatchBg,
+} from '../services/schemeService';
 import type { ScoredScheme } from '../services/schemeService';
 
 const CATEGORY_EMOJIS: Record<string, string> = {
@@ -28,18 +31,19 @@ export function CategorySchemesScreen() {
   const catColor = CATEGORY_COLORS[category] || CATEGORY_COLORS['health'];
   const emoji = CATEGORY_EMOJIS[category] || '📋';
 
-  const highMatch = useMemo(() => scored.filter(s => s.match.label === 'high'), [scored]);
-  const mediumMatch = useMemo(() => scored.filter(s => s.match.label === 'medium'), [scored]);
+  const highMatch = useMemo(() => scored.filter(s => s.match.label === 'perfect' || s.match.label === 'high'), [scored]);
+  const mediumMatch = useMemo(() => scored.filter(s => s.match.label === 'partial'), [scored]);
   const lowMatch = useMemo(() => scored.filter(s => s.match.label === 'low' || s.match.label === 'none'), [scored]);
 
   useEffect(() => {
     async function load() {
       setLoading(true);
       try {
-        const profile = userProfile?.occupation
-          ? { occupation: userProfile.occupation, details: userProfile.profileDetails }
-          : undefined;
-        const data = await getSchemesByCategoryWithScore(category, profile);
+        const data = await getSchemesByCategoryWithScore(
+          category,
+          userProfile?.occupation,
+          userProfile?.profileDetails || {},
+        );
         setScored(data);
       } catch (err) {
         console.error('Error loading category schemes:', err);
@@ -62,8 +66,8 @@ export function CategorySchemesScreen() {
           <div
             className="absolute -top-1 -right-1 z-10 text-[10px] font-black px-2 py-0.5 rounded-lg flex items-center gap-0.5"
             style={{
-              background: entry.match.label === 'high' ? 'rgba(0,200,150,0.15)' : 'rgba(255,184,0,0.15)',
-              color: entry.match.label === 'high' ? '#00C896' : '#FFB800',
+              background: getMatchBg(entry.match.label),
+              color: getMatchColor(entry.match.label),
               backdropFilter: 'blur(4px)',
             }}
           >

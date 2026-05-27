@@ -7,7 +7,10 @@ import { CategoryCard } from '../components/ui/CategoryCard';
 import { SchemeCardSkeleton, CategorySkeleton } from '../components/ui/Skeleton';
 import { motion } from 'framer-motion';
 import { OCCUPATIONS } from '../types/profile';
-import { getCategories, getFeaturedSchemes, getStats, searchSchemes, getScoredSchemes } from '../services/schemeService';
+import {
+  getCategories, getFeaturedSchemes, getStats, searchSchemes, getScoredSchemes,
+  getMatchColor, getMatchBg,
+} from '../services/schemeService';
 import type { AppStats, Scheme, CategoryStats } from '../services/firestoreService';
 import type { ScoredScheme } from '../services/schemeService';
 
@@ -39,10 +42,10 @@ export function HomeScreen() {
   const occLabel = OCCUPATIONS.find(o => o.id === occupation)?.label;
   const occEmoji = OCCUPATION_EMOJIS[occupation || ''] || '👤';
 
-  // High match (>=80%), medium match (>=50%), low match (<50%)
-  const highMatch = scoredSchemes.filter(s => s.match.label === 'high');
-  const mediumMatch = scoredSchemes.filter(s => s.match.label === 'medium');
-  const lowMatch = scoredSchemes.filter(s => s.match.label === 'low');
+  // Perfect match (100%), high match (75-99%), partial (40-74%), low (<40%)
+  const highMatch = scoredSchemes.filter(s => s.match.label === 'perfect' || s.match.label === 'high');
+  const mediumMatch = scoredSchemes.filter(s => s.match.label === 'partial');
+  const lowMatch = scoredSchemes.filter(s => s.match.label === 'low' || s.match.label === 'none');
 
   useEffect(() => {
     async function load() {
@@ -51,7 +54,7 @@ export function HomeScreen() {
           getCategories(),
           getFeaturedSchemes(),
           getStats(),
-          occupation ? getScoredSchemes({ occupation, details }) : Promise.resolve([]),
+          occupation ? getScoredSchemes(occupation, details || {}) : Promise.resolve([]),
         ]);
         setCategories(cats);
         setFeatured(featuredData);
@@ -378,9 +381,11 @@ function SchemeCardWithMatch({ scored, isDark }: { scored: ScoredScheme; isDark:
   const saved = isSaved(scheme.id);
 
   const badgeStyle = {
-    background: match.label === 'high' ? 'rgba(0,200,150,0.12)' : match.label === 'medium' ? 'rgba(255,184,0,0.12)' : match.label === 'low' ? 'rgba(255,107,53,0.12)' : 'rgba(239,68,68,0.12)',
-    color: match.label === 'high' ? '#00C896' : match.label === 'medium' ? '#FFB800' : match.label === 'low' ? '#FF6B35' : '#EF4444',
+    background: getMatchBg(match.label),
+    color: getMatchColor(match.label),
   };
+
+  const isHighMatch = match.label === 'perfect' || match.label === 'high';
 
   return (
     <div
@@ -391,7 +396,7 @@ function SchemeCardWithMatch({ scored, isDark }: { scored: ScoredScheme; isDark:
     >
       <div
         className="h-1 w-full"
-        style={{ background: match.label === 'high' ? 'linear-gradient(90deg, #00C896, #00A37A)' : match.label === 'medium' ? 'linear-gradient(90deg, #FFB800, #F59E0B)' : 'linear-gradient(90deg, #FF6B35, #E55A25)' }}
+        style={{ background: isHighMatch ? 'linear-gradient(90deg, #00C896, #00A37A)' : match.label === 'partial' ? 'linear-gradient(90deg, #FFB800, #F59E0B)' : 'linear-gradient(90deg, #FF6B35, #E55A25)' }}
       />
       <div className="p-3.5">
         <div className="flex items-start gap-3">

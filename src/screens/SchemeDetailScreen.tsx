@@ -11,7 +11,7 @@ import { Badge } from '../components/ui/Badge';
 import { CATEGORY_COLORS } from '../constants/colors';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getSchemeById } from '../services/schemeService';
-import { calculateMatch, getEligibilityColor, getEligibilityBg } from '../services/eligibilityEngine';
+import { calculateStrictMatch, getMatchColor, getMatchBg, getMatchLabel } from '../services/eligibilityEngine';
 import { isValidOfficialUrl, getDomainHint, getMySchemeFallbackUrl } from '../utils/linkValidator';
 import type { Scheme } from '../services/firestoreService';
 
@@ -57,7 +57,7 @@ export function SchemeDetailScreen() {
 
   const matchResult = useMemo(() => {
     if (!scheme || !userProfile?.occupation) return null;
-    return calculateMatch(
+    return calculateStrictMatch(
       {
         eligibleStates: scheme.eligibleStates,
         eligibleOccupations: scheme.eligibleOccupations,
@@ -66,10 +66,12 @@ export function SchemeDetailScreen() {
         eligibleCategories: scheme.eligibleCategories,
         minimumMarks: scheme.minimumMarks,
         genderEligibility: scheme.genderEligibility,
-        ageRange: scheme.ageRange,
+        minAge: scheme.ageRange?.min,
+        maxAge: scheme.ageRange?.max,
         disabilityEligible: scheme.disabilityEligible,
       },
-      { occupation: userProfile.occupation, details: userProfile.profileDetails }
+      userProfile.occupation,
+      userProfile.profileDetails || {},
     );
   }, [scheme, userProfile]);
 
@@ -166,50 +168,68 @@ export function SchemeDetailScreen() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08 }}
             className="rounded-2xl p-4 shadow-lg"
-            style={{ background: matchResult.label === 'high' ? 'rgba(0,200,150,0.08)' : matchResult.label === 'medium' ? 'rgba(255,184,0,0.08)' : 'rgba(255,107,53,0.08)', border: `1px solid ${getEligibilityColor(matchResult.label)}33` }}
+            style={{ background: getMatchBg(matchResult.label), border: `1px solid ${getMatchColor(matchResult.label)}33` }}
           >
             <div className="flex items-center gap-3">
               <div
                 className="w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black"
-                style={{ background: getEligibilityBg(matchResult.label), color: getEligibilityColor(matchResult.label) }}
+                style={{ background: getMatchBg(matchResult.label), color: getMatchColor(matchResult.label) }}
               >
                 {matchResult.score}%
               </div>
               <div className="flex-1">
                 <p className={`font-black text-sm ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                  {matchResult.label === 'high' ? 'You likely qualify!' : matchResult.label === 'medium' ? 'You may qualify' : matchResult.label === 'low' ? 'Partial eligibility' : 'Check eligibility requirements'}
+                  {getMatchLabel(matchResult.label)}
                 </p>
                 <div className="flex gap-2 mt-1">
-                  {matchResult.matched.length > 0 && (
-                    <span className="text-[10px] font-semibold" style={{ color: '#00C896' }}>
-                      +{matchResult.matched.length} matched
-                    </span>
-                  )}
-                  {matchResult.missed.length > 0 && (
-                    <span className="text-[10px] font-semibold" style={{ color: '#EF4444' }}>
-                      -{matchResult.missed.length} criteria
-                    </span>
-                  )}
+                  {(() => {
+                    const passed = matchResult.checks.filter(c => c.passed).length;
+                    const failed = matchResult.checks.filter(c => !c.passed && c.weight > 0).length;
+                    return (
+                      <>
+                        {passed > 0 && (
+                          <span className="text-[10px] font-semibold" style={{ color: '#00C896' }}>
+                            ✓ {passed} criteria
+                          </span>
+                        )}
+                        {failed > 0 && (
+                          <span className="text-[10px] font-semibold" style={{ color: '#EF4444' }}>
+                            ✗ {failed} criteria
+                          </span>
+                        )}
+                        {matchResult.missingFields.length > 0 && (
+                          <span className="text-[10px] font-semibold" style={{ color: '#FFB800' }}>
+                            ? {matchResult.missingFields.length} unanswered
+                          </span>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
               <div className="flex-shrink-0 text-2xl">
-                {matchResult.label === 'high' ? '✅' : matchResult.label === 'medium' ? '⚠️' : '📋'}
+                {matchResult.label === 'perfect' || matchResult.label === 'high' ? '✅' : matchResult.label === 'partial' ? '⚠️' : '📋'}
               </div>
             </div>
-            {matchResult.matched.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-3 pt-3" style={{ borderTop: `1px solid ${getEligibilityColor(matchResult.label)}22` }}>
-                {matchResult.matched.map((m, i) => (
-                  <span key={i} className="text-[10px] font-medium px-2 py-0.5 rounded-lg" style={{ background: 'rgba(0,200,150,0.1)', color: '#00C896' }}>
-                    ✓ {m}
+
+            {/* Eligibility breakdown */}
+            <div className="mt-3 pt-3 space-y-1.5" style={{ borderTop: `1px solid ${getMatchColor(matchResult.label)}22` }}>
+              {matchResult.checks.filter(c => c.weight > 0).map((check) => (
+                <div key={check.key} className="flex items-center justify-between text-xs">
+                  <span className={`font-medium ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {check.passed ? '✅' : '❌'} {check.label}
                   </span>
-                ))}
-                {matchResult.missed.map((m, i) => (
-                  <span key={i} className="text-[10px] font-medium px-2 py-0.5 rounded-lg" style={{ background: 'rgba(239,68,68,0.1)', color: '#EF4444' }}>
-                    ✗ {m}
+                  <span style={{ color: check.passed ? '#00C896' : '#EF4444' }}>
+                    {check.passed ? 'Eligible' : 'Not eligible'}
                   </span>
-                ))}
-              </div>
-            )}
+                </div>
+              ))}
+              {matchResult.missingFields.length > 0 && (
+                <div className="mt-2 pt-2 text-xs font-medium" style={{ borderTop: '1px dashed rgba(255,184,0,0.3)', color: '#FFB800' }}>
+                  Add info: {matchResult.missingFields.join(', ')} to improve match
+                </div>
+              )}
+            </div>
           </motion.div>
         )}
 

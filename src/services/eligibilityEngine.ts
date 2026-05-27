@@ -1,222 +1,277 @@
-export interface EligibilityRules {
-  eligibleStates?: string[];
-  eligibleOccupations?: string[];
-  maxIncome?: number;
-  minIncome?: number;
-  eligibleCategories?: string[];
-  minimumMarks?: number;
-  genderEligibility?: string[];
-  ageRange?: { min?: number; max?: number };
-  disabilityEligible?: boolean;
-}
+import type { EligibilityRuleSet, MatchBreakdown, MatchCheck, MatchLabel, AnswerMap } from '../types/eligibility';
+import { parseIncomeValue, parseIncomeMinMax, parseMarksValue } from '../types/eligibility';
 
-export interface MatchResult {
-  score: number;
-  label: 'high' | 'medium' | 'low' | 'none';
-  matched: string[];
-  partial: string[];
-  missed: string[];
-}
+const CRITICAL_WEIGHT = 25;
+const STANDARD_WEIGHT = 10;
+const OPTIONAL_WEIGHT = 5;
 
-function incomeValue(incomeKey: string): number {
-  const map: Record<string, number> = {
-    'below-1lakh': 100000,
-    '1-2.5lakh': 250000,
-    '2.5-5lakh': 500000,
-    '5-10lakh': 1000000,
-    'above-10lakh': 1500000,
-  };
-  return map[incomeKey] || 500000;
-}
-
-function parseIncome(incomeKey: string): { min: number; max: number } {
-  const map: Record<string, { min: number; max: number }> = {
-    'below-1lakh': { min: 0, max: 100000 },
-    '1-2.5lakh': { min: 100000, max: 250000 },
-    '2.5-5lakh': { min: 250000, max: 500000 },
-    '5-10lakh': { min: 500000, max: 1000000 },
-    'above-10lakh': { min: 1000000, max: Infinity },
-  };
-  return map[incomeKey] || { min: 0, max: Infinity };
-}
-
-function marksValue(marksStr: string): number {
-  const cleaned = marksStr.replace(/%/g, '').trim();
-  const num = parseFloat(cleaned);
-  if (isNaN(num)) return 0;
-  if (num <= 10 && cleaned.includes('.')) return num * 10;
-  return num;
-}
-
-export function calculateMatch(
-  rules: EligibilityRules,
-  profile: { occupation?: string; details?: Record<string, string> }
-): MatchResult {
-  const details = profile.details || {};
-  const matched: string[] = [];
-  const partial: string[] = [];
-  const missed: string[] = [];
-  let totalChecks = 0;
-  let passed = 0;
-
-  // Occupation check
-  if (rules.eligibleOccupations && rules.eligibleOccupations.length > 0) {
-    totalChecks++;
-    if (profile.occupation && rules.eligibleOccupations.includes(profile.occupation)) {
-      passed++;
-      matched.push('Occupation matches');
-    } else {
-      const partialMatch = rules.eligibleOccupations.some(o =>
-        profile.occupation === 'student' && ['students', 'education'].includes(o) ||
-        profile.occupation === 'farmer' && ['farmers', 'agriculture'].includes(o) ||
-        profile.occupation === 'senior-citizen' && ['senior-citizens', 'senior'].includes(o)
-      );
-      if (partialMatch) {
-        partial.push('Occupation partially matches');
-        passed += 0.5;
-      } else {
-        missed.push('Occupation not eligible');
-      }
-    }
+function checkValue(
+  key: string,
+  label: string,
+  userValue: string | undefined,
+  ruleValue: string[] | undefined,
+  weight: number,
+): MatchCheck {
+  if (!ruleValue || ruleValue.length === 0) {
+    return { key, label, passed: true, weight: 0 };
   }
+  if (!userValue) {
+    return { key, label, passed: false, weight };
+  }
+  const passed = ruleValue.some(r => r.toLowerCase() === userValue.toLowerCase());
+  return { key, label, passed, weight };
+}
 
-  // State check
+function checkNumberMin(
+  key: string,
+  label: string,
+  userValue: string | undefined,
+  minThreshold: number | undefined,
+  weight: number,
+): MatchCheck {
+  if (minThreshold === undefined || minThreshold === null) {
+    return { key, label, passed: true, weight: 0 };
+  }
+  const val = parseFloat(userValue || '');
+  if (isNaN(val)) {
+    return { key, label, passed: false, weight };
+  }
+  return { key, label, passed: val >= minThreshold, weight };
+}
+
+function checkNumberMax(
+  key: string,
+  label: string,
+  userValue: string | undefined,
+  maxThreshold: number | undefined,
+  weight: number,
+): MatchCheck {
+  if (maxThreshold === undefined || maxThreshold === null) {
+    return { key, label, passed: true, weight: 0 };
+  }
+  const val = parseFloat(userValue || '');
+  if (isNaN(val)) {
+    return { key, label, passed: false, weight };
+  }
+  return { key, label, passed: val <= maxThreshold, weight };
+}
+
+function checkYesNo(
+  key: string,
+  label: string,
+  userValue: string | undefined,
+  expectedYes: boolean | undefined,
+  weight: number,
+): MatchCheck {
+  if (expectedYes === undefined || expectedYes === null) {
+    return { key, label, passed: true, weight: 0 };
+  }
+  if (!userValue) {
+    return { key, label, passed: false, weight };
+  }
+  const isYes = userValue === 'yes' || userValue === 'true' || userValue === '1';
+  return { key, label, passed: isYes === expectedYes, weight };
+}
+
+export function calculateStrictMatch(
+  rules: EligibilityRuleSet,
+  occupation: string | undefined,
+  answers: AnswerMap,
+): MatchBreakdown {
+  const checks: MatchCheck[] = [];
+  const missingFields: string[] = [];
+
+  // 1. Occupation check (CRITICAL)
+  checks.push(checkValue('occupation', 'Occupation matches', occupation, rules.eligibleOccupations, CRITICAL_WEIGHT));
+
+  // 2. State check (CRITICAL if specified)
   if (rules.eligibleStates && rules.eligibleStates.length > 0) {
-    totalChecks++;
-    const userState = details['state'] || '';
-    if (rules.eligibleStates.some(s => s.toLowerCase() === userState.toLowerCase())) {
-      passed++;
-      matched.push('State matches');
+    const userState = answers['state'] || '';
+    const hasAllIndia = rules.eligibleStates.some(s => s.toLowerCase().includes('all india') || s.toLowerCase().includes('all'));
+    if (hasAllIndia) {
+      checks.push({ key: 'state', label: 'Open to all states', passed: true, weight: 0 });
     } else {
-      const isAllIndia = rules.eligibleStates.some(s =>
-        s.toLowerCase().includes('all india') || s.toLowerCase().includes('all')
-      );
-      if (isAllIndia) {
-        passed++;
-        matched.push('Open to all states');
-      } else {
-        missed.push('State not eligible');
-      }
+      const passed = rules.eligibleStates.some(s => s.toLowerCase() === userState.toLowerCase());
+      checks.push({ key: 'state', label: 'State in eligible list', passed, weight: CRITICAL_WEIGHT });
+      if (!userState) missingFields.push('state');
     }
   }
 
-  // Income check
-  const incomeKey = details['familyIncome'] || details['annualIncome'] || details['annualTurnover'] || '';
-  if (incomeKey && rules.maxIncome) {
-    totalChecks++;
-    const userIncome = incomeValue(incomeKey);
-    if (userIncome <= rules.maxIncome) {
-      passed++;
-      matched.push('Income within limit');
-    } else if (userIncome <= rules.maxIncome * 1.5) {
-      partial.push('Income slightly above limit');
-      passed += 0.5;
-    } else {
-      missed.push('Income exceeds limit');
-    }
-  }
-  if (incomeKey && rules.minIncome) {
-    totalChecks++;
-    const userIncome = incomeValue(incomeKey);
-    if (userIncome >= rules.minIncome) {
-      passed++;
-      matched.push('Meets minimum income');
-    } else {
-      missed.push('Income below minimum');
-    }
-  }
-
-  // Category (caste) check
+  // 3. Category check (CRITICAL)
   if (rules.eligibleCategories && rules.eligibleCategories.length > 0) {
-    totalChecks++;
-    const userCategory = (details['category'] || '').toUpperCase();
-    if (rules.eligibleCategories.some(c => c.toUpperCase() === userCategory)) {
-      passed++;
-      matched.push('Category matches');
+    const userCat = (answers['category'] || '').toUpperCase();
+    const isOpen = rules.eligibleCategories.some(c => c.toUpperCase() === 'ALL' || c.toUpperCase() === 'GENERAL');
+    if (isOpen) {
+      checks.push({ key: 'category', label: 'Open to all categories', passed: true, weight: 0 });
     } else {
-      const isGeneralOpen = rules.eligibleCategories.some(c => c.toUpperCase() === 'ALL' || c.toUpperCase() === 'GENERAL');
-      if (isGeneralOpen) {
-        passed++;
-        matched.push('Open to all categories');
-      } else {
-        missed.push('Category not in eligibility');
-      }
+      const passed = rules.eligibleCategories.some(c => c.toUpperCase() === userCat);
+      checks.push({ key: 'category', label: 'Category eligible', passed, weight: CRITICAL_WEIGHT });
+      if (!answers['category']) missingFields.push('category');
     }
   }
 
-  // Marks check
-  if (rules.minimumMarks && rules.minimumMarks > 0) {
-    totalChecks++;
-    const userMarks = marksValue(details['marks'] || '0');
-    if (userMarks >= rules.minimumMarks) {
-      passed++;
-      matched.push('Marks meet requirement');
-    } else if (userMarks > 0) {
-      missed.push(`Marks below ${rules.minimumMarks}%`);
+  // 4. Income check (CRITICAL)
+  if (rules.maxIncome !== undefined) {
+    const incomeKey = answers['familyIncome'] || answers['annualIncome'] || answers['annualTurnover'] || answers['incomeRange'] || answers['monthlyIncome'] || answers['householdIncome'] || '';
+    if (incomeKey) {
+      const userIncome = parseIncomeValue(incomeKey);
+      checks.push({ key: 'income', label: `Income ≤ ₹${(rules.maxIncome / 100000).toFixed(1)}L`, passed: userIncome <= rules.maxIncome, weight: CRITICAL_WEIGHT });
+    } else {
+      checks.push({ key: 'income', label: 'Income within limit', passed: false, weight: CRITICAL_WEIGHT });
+      missingFields.push('familyIncome');
+    }
+  }
+  if (rules.minIncome !== undefined) {
+    const incomeKey = answers['familyIncome'] || answers['annualIncome'] || answers['annualTurnover'] || '';
+    if (incomeKey) {
+      const userIncome = parseIncomeValue(incomeKey);
+      checks.push({ key: 'minIncome', label: `Income ≥ ₹${(rules.minIncome / 100000).toFixed(1)}L`, passed: userIncome >= rules.minIncome, weight: STANDARD_WEIGHT });
+    } else {
+      checks.push({ key: 'minIncome', label: 'Meets minimum income', passed: false, weight: STANDARD_WEIGHT });
     }
   }
 
-  // Gender check
+  // 5. Marks check (CRITICAL)
+  if (rules.minimumMarks !== undefined && rules.minimumMarks > 0) {
+    const userMarks = parseMarksValue(answers['marks'] || '0');
+    const passed = userMarks >= rules.minimumMarks;
+    checks.push({ key: 'marks', label: `Minimum ${rules.minimumMarks}% marks`, passed: passed && userMarks > 0, weight: CRITICAL_WEIGHT });
+    if (userMarks === 0) missingFields.push('marks');
+  }
+
+  // 6. Age check (CRITICAL)
+  if (rules.minAge !== undefined) {
+    const userAge = parseInt(answers['age'] || '', 10);
+    checks.push({ key: 'minAge', label: `Minimum age ${rules.minAge}`, passed: !isNaN(userAge) && userAge >= rules.minAge, weight: CRITICAL_WEIGHT });
+    if (isNaN(userAge)) missingFields.push('age');
+  }
+  if (rules.maxAge !== undefined) {
+    const userAge = parseInt(answers['age'] || '', 10);
+    checks.push({ key: 'maxAge', label: `Maximum age ${rules.maxAge}`, passed: !isNaN(userAge) && userAge <= rules.maxAge, weight: CRITICAL_WEIGHT });
+    if (isNaN(userAge)) missingFields.push('age');
+  }
+
+  // 7. Gender check (CRITICAL)
   if (rules.genderEligibility && rules.genderEligibility.length > 0) {
-    totalChecks++;
-    const userGender = (details['gender'] || '').toLowerCase();
-    if (rules.genderEligibility.some(g => g.toLowerCase() === userGender)) {
-      passed++;
-      matched.push('Gender matches');
-    } else if (rules.genderEligibility.includes('all')) {
-      passed++;
-      matched.push('Open to all genders');
+    const userGender = (answers['gender'] || '').toLowerCase();
+    const isAllGenders = rules.genderEligibility.some(g => g.toLowerCase() === 'all');
+    if (isAllGenders) {
+      checks.push({ key: 'gender', label: 'Open to all genders', passed: true, weight: 0 });
     } else {
-      const isWomanScheme = rules.genderEligibility.some(g => g.toLowerCase() === 'female' || g.toLowerCase() === 'woman');
-      if (isWomanScheme && profile.occupation === 'woman') {
-        partial.push('Considered as woman');
-        passed += 0.5;
-      } else {
-        missed.push('Gender not eligible');
-      }
+      const passed = rules.genderEligibility.some(g => g.toLowerCase() === userGender);
+      checks.push({ key: 'gender', label: 'Gender eligible', passed, weight: CRITICAL_WEIGHT });
+      if (!answers['gender']) missingFields.push('gender');
     }
   }
 
-  // Disability check
+  // 8. Disability (STANDARD)
   if (rules.disabilityEligible === true) {
-    totalChecks++;
-    if (details['disability'] === 'yes' || profile.occupation === 'disabled-person') {
-      passed++;
-      matched.push('Disability eligible');
-    } else {
-      // Not a requirement (scheme is open to all, disabled are also eligible)
-      passed++;
-      matched.push('Open to all (includes disabled)');
-    }
+    const isDisabled = answers['disability'] === 'yes' || occupation === 'disabled-person';
+    checks.push({ key: 'disability', label: 'Disability eligible', passed: isDisabled, weight: STANDARD_WEIGHT });
   }
 
-  if (totalChecks === 0) return { score: 100, label: 'high', matched: ['Open to all'], partial: [], missed: [] };
+  // ── STANDARD / OPTIONAL CHECKS ─────────────────────────────────────────
 
-  const rawScore = (passed / totalChecks) * 100;
+  if (rules.courseTypes && rules.courseTypes.length > 0) {
+    const userCourse = answers['course'] || '';
+    const passed = rules.courseTypes.some(c => userCourse.toLowerCase().includes(c.toLowerCase()));
+    checks.push({ key: 'courseType', label: 'Course type eligible', passed, weight: STANDARD_WEIGHT });
+  }
+
+  if (rules.degreeTypes && rules.degreeTypes.length > 0) {
+    const userDegree = answers['degreeType'] || '';
+    const passed = rules.degreeTypes.some(d => userDegree.toLowerCase().includes(d.toLowerCase()));
+    checks.push({ key: 'degreeType', label: 'Degree type eligible', passed, weight: STANDARD_WEIGHT });
+  }
+
+  if (rules.streams && rules.streams.length > 0) {
+    const userStream = answers['stream'] || '';
+    const passed = rules.streams.some(s => userStream.toLowerCase().includes(s.toLowerCase()));
+    checks.push({ key: 'stream', label: 'Stream eligible', passed, weight: STANDARD_WEIGHT });
+  }
+
+  if (rules.hostelRequired !== undefined) {
+    checks.push(checkYesNo('hostel', 'Hostel resident', answers['hosteller'], rules.hostelRequired, OPTIONAL_WEIGHT));
+  }
+
+  if (rules.singleGirlChild !== undefined) {
+    checks.push(checkYesNo('singleGirlChild', 'Single girl child', answers['singleGirlChild'], rules.singleGirlChild, OPTIONAL_WEIGHT));
+  }
+
+  if (rules.exServicemanFamily !== undefined) {
+    checks.push(checkYesNo('exServiceman', 'Ex-serviceman family', answers['exServiceman'], rules.exServicemanFamily, OPTIONAL_WEIGHT));
+  }
+
+  if (rules.orphanEligible !== undefined) {
+    checks.push(checkYesNo('orphan', 'Orphan eligible', answers['orphan'], rules.orphanEligible, OPTIONAL_WEIGHT));
+  }
+
+  if (rules.ruralRequired !== undefined) {
+    const userRural = answers['rural'] || answers['ruralUrban'] || '';
+    const isRural = userRural === 'rural' || userRural === 'yes';
+    checks.push({ key: 'rural', label: 'Rural residence', passed: isRural === rules.ruralRequired, weight: OPTIONAL_WEIGHT });
+  }
+
+  if (rules.govtSchoolRequired !== undefined) {
+    checks.push(checkYesNo('govtSchool', 'Government school student', answers['govtSchool'], rules.govtSchoolRequired, OPTIONAL_WEIGHT));
+  }
+
+  if (rules.bplRequired !== undefined) {
+    checks.push(checkYesNo('bpl', 'BPL family', answers['bpl'], rules.bplRequired, OPTIONAL_WEIGHT));
+  }
+
+  if (rules.minorityEligible !== undefined) {
+    checks.push(checkYesNo('minority', 'Minority community', answers['minority'], rules.minorityEligible, OPTIONAL_WEIGHT));
+  }
+
+  // ── SCORING ────────────────────────────────────────────────────────────
+
+  const totalWeight = checks.reduce((sum, c) => sum + c.weight, 0);
+  const passedWeight = checks.reduce((sum, c) => sum + (c.passed ? c.weight : 0), 0);
+
+  if (totalWeight === 0) {
+    return { score: 100, label: 'perfect', checks, missingFields };
+  }
+
+  const rawScore = (passedWeight / totalWeight) * 100;
   const score = Math.round(rawScore);
-  let label: MatchResult['label'] = 'low';
-  if (score >= 80) label = 'high';
-  else if (score >= 50) label = 'medium';
+
+  let label: MatchLabel = 'none';
+  if (score === 100) label = 'perfect';
+  else if (score >= 75) label = 'high';
+  else if (score >= 40) label = 'partial';
   else if (score > 0) label = 'low';
   else label = 'none';
 
-  return { score, label, matched, partial, missed };
+  return { score, label, checks, missingFields };
 }
 
-export function getEligibilityColor(label: MatchResult['label']): string {
+export function getMatchColor(label: MatchLabel): string {
   switch (label) {
+    case 'perfect': return '#00C896';
     case 'high': return '#00C896';
-    case 'medium': return '#FFB800';
+    case 'partial': return '#FFB800';
     case 'low': return '#FF6B35';
     case 'none': return '#EF4444';
   }
 }
 
-export function getEligibilityBg(label: MatchResult['label']): string {
+export function getMatchBg(label: MatchLabel): string {
   switch (label) {
+    case 'perfect': return 'rgba(0,200,150,0.12)';
     case 'high': return 'rgba(0,200,150,0.12)';
-    case 'medium': return 'rgba(255,184,0,0.12)';
+    case 'partial': return 'rgba(255,184,0,0.12)';
     case 'low': return 'rgba(255,107,53,0.12)';
     case 'none': return 'rgba(239,68,68,0.12)';
+  }
+}
+
+export function getMatchLabel(label: MatchLabel): string {
+  switch (label) {
+    case 'perfect': return 'Perfect Match';
+    case 'high': return 'High Match';
+    case 'partial': return 'Partial Match';
+    case 'low': return 'Low Match';
+    case 'none': return 'Not Eligible';
   }
 }
