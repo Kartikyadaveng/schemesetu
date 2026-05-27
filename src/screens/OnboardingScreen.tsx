@@ -108,8 +108,9 @@ export function OnboardingScreen() {
   const totalSteps = sections.length + 1; // +1 for occupation step
 
   const visibleQuestions = useMemo(() => {
-    if (!currentSection) return [];
-    const all = getQuestionsForSection(occKey!, currentSection);
+    if (!currentSection || !occKey) return [];
+    const all = getQuestionsForSection(occKey, currentSection);
+    if (!all) return [];
     return all.filter(q => {
       if (!q.dependsOn) return true;
       const depVal = answers[q.dependsOn.key];
@@ -118,8 +119,9 @@ export function OnboardingScreen() {
   }, [occKey, currentSection, answers]);
 
   const isLastStep = step === totalSteps - 1;
-  const progress = ((step) / (totalSteps - 1)) * 100;
-  const stepLabel = step === 0 ? 'Choose Occupation' : `${currentSection} (${step}/${totalSteps - 1})`;
+  const maxSteps = Math.max(totalSteps - 1, 1);
+  const progress = ((step) / maxSteps) * 100;
+  const stepLabel = step === 0 ? 'Choose Occupation' : `${currentSection} (${step}/${maxSteps})`;
 
   function setAnswer(key: string, value: string) {
     setAnswers(prev => ({ ...prev, [key]: value }));
@@ -132,7 +134,8 @@ export function OnboardingScreen() {
 
   function validateStep(): boolean {
     const newErrors: Record<string, string> = {};
-    for (const q of visibleQuestions) {
+    const qs = visibleQuestions || [];
+    for (const q of qs) {
       const err = validateAnswer(q, answers[q.key] || '');
       if (err) newErrors[q.key] = err;
     }
@@ -160,8 +163,9 @@ export function OnboardingScreen() {
 
   async function handleComplete() {
     if (!occupation) return;
+    const qs = questions || [];
     // Validate all answers one more time
-    for (const q of questions) {
+    for (const q of qs) {
       if (q.dependsOn) {
         const depVal = answers[q.dependsOn.key];
         if (depVal !== q.dependsOn.value) continue;
@@ -169,9 +173,9 @@ export function OnboardingScreen() {
       const err = validateAnswer(q, answers[q.key] || '');
       if (err) {
         setErrors(prev => ({ ...prev, [q.key]: err }));
-        // Find which section this question belongs to and navigate there
-        const secIdx = sections.indexOf(q.section);
-        setStep(secIdx + 1);
+        const secs = sections || [];
+        const secIdx = secs.indexOf(q.section);
+        setStep(secIdx >= 0 ? secIdx + 1 : 1);
         return;
       }
     }
@@ -215,10 +219,11 @@ export function OnboardingScreen() {
     const value = answers[q.key] || '';
     const error = errors[q.key];
 
-    if (q.type === 'select' && q.options) {
+    if (q.type === 'select') {
+      const opts = q.options || [];
       return (
         <div className="space-y-2">
-          {q.options.map(opt => (
+          {opts.map(opt => (
             <SelectOption
               key={opt.value}
               label={opt.label}
@@ -268,9 +273,11 @@ export function OnboardingScreen() {
   };
 
   const renderQuestionStep = () => {
-    if (!visibleQuestions.length) {
-      // Section has no visible questions (all conditional), skip to next
-      setTimeout(() => handleNext(), 0);
+    const vq = visibleQuestions || [];
+    if (!vq.length) {
+      if (step < totalSteps - 1) {
+        setTimeout(() => handleNext(), 0);
+      }
       return null;
     }
 
@@ -281,7 +288,7 @@ export function OnboardingScreen() {
           Step {step} of {totalSteps - 1}
         </p>
         <div className="space-y-6">
-          {visibleQuestions.map(q => (
+          {vq.map(q => (
             <div key={q.key}>
               <label className="block text-white font-semibold text-sm mb-2.5">
                 {q.label}

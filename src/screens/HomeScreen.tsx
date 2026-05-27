@@ -433,9 +433,11 @@ function SchemeCardWithMatch({ scored, isDark }: { scored: ScoredScheme; isDark:
                   {scheme.amount}
                 </span>
               )}
-              <span className={`text-[10px] ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                {match.matched.length > 0 && match.matched[0]}
-              </span>
+              {match.checks.filter(c => c.passed).length > 0 && (
+                <span className={`text-[10px] ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                  {match.checks.filter(c => c.passed)[0]?.label}
+                </span>
+              )}
             </div>
           </div>
         </div>
