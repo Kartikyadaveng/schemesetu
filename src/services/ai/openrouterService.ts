@@ -9,7 +9,7 @@ export interface AIResponse {
 
 let client: OpenAI | null = null;
 let messageHistory: { role: 'system' | 'user' | 'assistant'; content: string }[] = [];
-let currentModel = config.model;
+let currentModel = config.model as string;
 
 const getClient = (): OpenAI => {
   if (!config.openRouterApiKey) {

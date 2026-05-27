@@ -1,18 +1,16 @@
 // ============================================================
 // SchemeSetu - Splash Screen
-// App intro screen with logo, tagline, and animations
+// Pure loading screen — NO auth or navigation logic.
+// Auth gating is handled by AppNavigator + AppContext.
 // ============================================================
 
 import { useEffect, useState } from 'react';
-import { useApp } from '../context/AppContext';
 import { motion } from 'framer-motion';
 
 export function SplashScreen() {
-  const { setScreen } = useApp();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Animate progress bar
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -23,16 +21,8 @@ export function SplashScreen() {
       });
     }, 40);
 
-    // Navigate to login after 2.5s
-    const timer = setTimeout(() => {
-      setScreen('login');
-    }, 2600);
-
-    return () => {
-      clearTimeout(timer);
-      clearInterval(interval);
-    };
-  }, [setScreen]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
@@ -97,12 +87,10 @@ export function SplashScreen() {
           transition={{ delay: 0.4, duration: 0.7, type: 'spring', bounce: 0.4 }}
           className="relative"
         >
-          {/* Glow ring */}
           <div
             className="absolute inset-0 rounded-3xl blur-2xl"
             style={{ background: 'rgba(255,107,53,0.4)', transform: 'scale(1.2)' }}
           />
-          {/* Logo container */}
           <div
             className="relative w-28 h-28 rounded-3xl flex items-center justify-center shadow-2xl"
             style={{ background: 'linear-gradient(135deg, #FF6B35, #E55A25)' }}
@@ -112,11 +100,9 @@ export function SplashScreen() {
               alt="SchemeSetu Logo"
               className="w-20 h-20 object-contain"
               onError={e => {
-                // Fallback if image fails to load
                 (e.target as HTMLImageElement).style.display = 'none';
               }}
             />
-            {/* Fallback text logo */}
             <span className="absolute text-white font-black text-3xl">स</span>
           </div>
         </motion.div>

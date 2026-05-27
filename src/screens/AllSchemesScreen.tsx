@@ -5,7 +5,7 @@ import { BottomNav } from '../components/ui/BottomNav';
 import { SchemeCard } from '../components/ui/SchemeCard';
 import { SchemeCardSkeleton } from '../components/ui/Skeleton';
 import { motion } from 'framer-motion';
-import { getAllSchemes, searchSchemes } from '../services/schemeService';
+import { getAllSchemes } from '../services/schemeService';
 import type { Scheme } from '../services/firestoreService';
 
 export function AllSchemesScreen() {

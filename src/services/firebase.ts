@@ -7,19 +7,20 @@ import { initializeApp, type FirebaseApp } from 'firebase/app';
 import { getAnalytics, type Analytics } from 'firebase/analytics';
 import {
   getAuth,
-  connectAuthEmulator,
+  setPersistence,
+  browserLocalPersistence,
+  getRedirectResult,
   type Auth,
   type User as FirebaseUser,
+  type UserCredential,
 } from 'firebase/auth';
 import {
   getFirestore,
-  connectFirestoreEmulator,
   enableIndexedDbPersistence,
   type Firestore,
 } from 'firebase/firestore';
 import {
   getStorage,
-  connectStorageEmulator,
   type FirebaseStorage,
 } from 'firebase/storage';
 import { config } from '../config/env';
@@ -65,6 +66,9 @@ export function initFirebase(): boolean {
   try {
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence).catch((err) => {
+      console.warn('Auth persistence setup failed:', err);
+    });
     db = getFirestore(app);
     storage = getStorage(app);
     analytics = getAnalytics(app);
@@ -123,10 +127,32 @@ export function onAuthChange(callback: (user: FirebaseUser | null) => void): () 
   return a.onAuthStateChanged(callback);
 }
 
+// ── Wait for initial auth state resolution ───────────────────────────────────
+// Resolves once Firebase has completed its initial session restore check.
+// Use this to prevent "flash of login screen" when a user is already signed in.
+
+export async function waitForAuthReady(): Promise<void> {
+  const a = getAuthInstance();
+  await a.authStateReady();
+}
+
 // ── Check if Firebase is ready ───────────────────────────────────────────────
 
 export function isFirebaseReady(): boolean {
   return app !== null && !!firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith('YOUR_');
+}
+
+// ── Redirect Result Handler ───────────────────────────────────────────────────
+// Processes pending sign-in redirect results (used on mobile). Safe to call on
+// every app mount — resolves to null if no redirect is pending.
+
+export async function handleRedirectResult(): Promise<UserCredential | null> {
+  const a = getAuthInstance();
+  try {
+    return await getRedirectResult(a);
+  } catch {
+    return null;
+  }
 }
 
 // Export types

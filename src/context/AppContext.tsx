@@ -1,9 +1,10 @@
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, ReactNode, useCallback } from 'react';
 import { DUMMY_SCHEMES, type Scheme } from '../constants/dummyData';
 import { type Lang } from '../constants/strings';
-import { initFirebase, isFirebaseReady, getAuthInstance, onAuthChange } from '../services/firebase';
+import { initFirebase, isFirebaseReady, getAuthInstance, onAuthChange, handleRedirectResult } from '../services/firebase';
 import * as firestore from '../services/firestoreService';
 import type { Occupation } from '../types/profile';
+import { isMobileDevice } from '../utils/device';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -39,6 +40,7 @@ export interface UserProfileData {
 
 // Allow saving profile data (works for both Firebase users and guests)
 export const GUEST_PROFILE_KEY = 'schemesetu_guest_profile';
+export const GUEST_UID_KEY = 'schemesetu_guest_uid';
 
 interface AppContextType {
   currentScreen: Screen;
@@ -53,6 +55,8 @@ interface AppContextType {
 
   user: User | null;
   userProfile: UserProfileData | null;
+  isAuthLoading: boolean;
+  isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   loginAsGuest: () => void;
@@ -72,9 +76,18 @@ interface AppContextType {
   setUnreadCount: (count: number) => void;
 
   isLoading: boolean;
+  profileLoading: boolean;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
+
+const makeUser = (fbUser: { uid: string; displayName: string | null; email: string | null; photoURL: string | null; providerData: { providerId: string }[] }): User => ({
+  uid: fbUser.uid,
+  name: fbUser.displayName || fbUser.email?.split('@')[0] || 'User',
+  email: fbUser.email || '',
+  photoURL: fbUser.photoURL || undefined,
+  provider: fbUser.providerData[0]?.providerId === 'google.com' ? 'google' : 'email',
+});
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [currentScreen, setCurrentScreen] = useState<Screen>('splash');
@@ -87,74 +100,179 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [unreadCount, setUnreadCount] = useState(2);
   const [isLoading, setIsLoading] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const authInitDone = useRef(false);
 
-  // Initialize Firebase on mount
-  useEffect(() => {
-    initFirebase();
-  }, []);
-
-  const loadProfile = useCallback(async (uid: string) => {
-    if (!isFirebaseReady()) return;
-    setProfileLoading(true);
+  const loadProfile = useCallback(async (uid: string): Promise<UserProfileData | null> => {
+    if (!isFirebaseReady()) return null;
     try {
       const data = await firestore.getUserProfile(uid) as Record<string, unknown> | null;
       if (data) {
-        setUserProfile({
+        return {
           occupation: data.occupation as Occupation | undefined,
           profileDetails: data.profileDetails as Record<string, string> | undefined,
           completedOnboarding: data.completedOnboarding === true,
-        });
-        if (!data.completedOnboarding && !user?.isGuest) {
-          setCurrentScreen('onboarding');
-        }
-      } else {
-        setUserProfile({ completedOnboarding: false });
-        if (!user?.isGuest) {
-          setCurrentScreen('onboarding');
+        };
+      }
+      return { completedOnboarding: false };
+    } catch {
+      return { completedOnboarding: false };
+    }
+  }, []);
+
+  // ── ONE auth init effect — runs once on mount ──────────────────────────
+  useEffect(() => {
+    const fbReady = initFirebase();
+
+    if (!fbReady) {
+      // Firebase not configured — restore guest or go straight to login
+      const guestUid = localStorage.getItem(GUEST_UID_KEY);
+      const savedProfile = localStorage.getItem(GUEST_PROFILE_KEY);
+      if (guestUid && savedProfile) {
+        try {
+          const parsed = JSON.parse(savedProfile) as UserProfileData;
+          setUser({
+            uid: guestUid, name: 'Guest User', email: 'guest@schemesetu.in',
+            isGuest: true, provider: 'guest',
+          });
+          setUserProfile(parsed);
+          setIsAuthLoading(false);
+          setCurrentScreen(parsed.completedOnboarding ? 'home' : 'onboarding');
+          return;
+        } catch {
+          localStorage.removeItem(GUEST_UID_KEY);
+          localStorage.removeItem(GUEST_PROFILE_KEY);
         }
       }
-    } catch {
-      setUserProfile({ completedOnboarding: false });
-    } finally {
-      setProfileLoading(false);
+      setUser(null);
+      setUserProfile(null);
+      setIsAuthLoading(false);
+      setCurrentScreen('login');
+      return;
     }
-  }, [user?.isGuest]);
 
-  // Firebase auth state listener
-  useEffect(() => {
-    if (!isFirebaseReady()) return;
+    // Subscribe to post-init auth events (login, logout, token expiry)
+    const unsub = onAuthChange((firebaseUser) => {
+      if (!authInitDone.current) return;
 
-    const unsubscribe = onAuthChange(async (firebaseUser) => {
       if (firebaseUser) {
-        const appUser: User = {
-          uid: firebaseUser.uid,
-          name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'User',
-          email: firebaseUser.email || '',
-          photoURL: firebaseUser.photoURL || undefined,
-          provider: firebaseUser.providerData[0]?.providerId === 'google.com' ? 'google' : 'email',
-        };
+        const appUser = makeUser(firebaseUser);
         setUser(appUser);
+        setIsAuthenticated(true);
+        setUserProfile(null);
+        setSavedSchemes([]);
+        setCurrentScreen('home');
+        loadProfile(firebaseUser.uid).then(profile => {
+          if (profile) setUserProfile(profile);
+          setCurrentScreen(profile?.completedOnboarding ? 'home' : 'onboarding');
+        });
+        firestore.getUserBookmarks(firebaseUser.uid).then(b => setSavedSchemes(b)).catch(() => {});
+      } else {
+        setUser(null);
+        setUserProfile(null);
+        setSavedSchemes([]);
+        setIsAuthenticated(false);
+        setCurrentScreen('login');
+      }
+    });
 
-        // Load bookmarks from Firestore
+    // Wait for Firebase to resolve the initial auth state
+    getAuthInstance().authStateReady().then(async () => {
+      const currentUser = getAuthInstance().currentUser;
+
+      if (currentUser) {
+        localStorage.removeItem(GUEST_UID_KEY);
+        localStorage.removeItem(GUEST_PROFILE_KEY);
+
+        const appUser = makeUser(currentUser);
+        setUser(appUser);
+        setIsAuthenticated(true);
+
         try {
-          const bookmarks = await firestore.getUserBookmarks(firebaseUser.uid);
+          const existing = await firestore.getUserProfile(currentUser.uid);
+          if (!existing) {
+            await firestore.updateUserProfile(currentUser.uid, {
+              name: appUser.name, email: appUser.email,
+              photoURL: appUser.photoURL, provider: appUser.provider,
+            });
+          }
+        } catch (e) {
+          console.warn('Failed to create/verify Firestore profile:', e);
+        }
+
+        const profile = await loadProfile(currentUser.uid);
+        if (profile) setUserProfile(profile);
+
+        try {
+          const bookmarks = await firestore.getUserBookmarks(currentUser.uid);
           setSavedSchemes(bookmarks);
         } catch (e) {
           console.warn('Failed to load bookmarks:', e);
         }
 
-        // Load user profile (checks onboarding status)
-        await loadProfile(firebaseUser.uid);
-      } else if (currentScreen !== 'splash') {
-        // User signed out — only reset if we're not still in splash
+        // ── Everything loaded — navigate and unlock in one batch ──
+        authInitDone.current = true;
+        setIsAuthLoading(false);
+        setCurrentScreen(profile?.completedOnboarding ? 'home' : 'onboarding');
+      } else {
+        // No Firebase user — attempt guest restore
+        const guestUid = localStorage.getItem(GUEST_UID_KEY);
+        const savedProfile = localStorage.getItem(GUEST_PROFILE_KEY);
+        if (guestUid && savedProfile) {
+          try {
+            const parsed = JSON.parse(savedProfile) as UserProfileData;
+            if (parsed.completedOnboarding) {
+              setUser({
+                uid: guestUid, name: 'Guest User', email: 'guest@schemesetu.in',
+                isGuest: true, provider: 'guest',
+              });
+              setUserProfile(parsed);
+              authInitDone.current = true;
+              setIsAuthLoading(false);
+              setCurrentScreen('home');
+              return;
+            }
+          } catch {
+            localStorage.removeItem(GUEST_UID_KEY);
+            localStorage.removeItem(GUEST_PROFILE_KEY);
+          }
+        }
+
+        // Guest without completed onboarding or no guest at all
+        localStorage.removeItem(GUEST_UID_KEY);
         setUser(null);
         setUserProfile(null);
-        setSavedSchemes([]);
+        authInitDone.current = true;
+        setIsAuthLoading(false);
+        setCurrentScreen('login');
       }
     });
 
-    return () => unsubscribe();
-  }, [loadProfile, currentScreen]);
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  // Handle Google redirect result (mobile) — catches errors from redirect flow
+  useEffect(() => {
+    if (!isFirebaseReady()) return;
+
+    handleRedirectResult().then((result) => {
+      if (result) {
+        console.log('Redirect sign-in successful');
+      }
+    }).catch((err: unknown) => {
+      const e = err as { code?: string; message?: string };
+      if (e.code === 'auth/popup-closed-by-user') return;
+      if (e.code === 'auth/redirect-cancelled') return;
+      if (e.code === 'auth/unauthorized-domain') {
+        alert(`Add "${window.location.hostname}" to Firebase Auth → Authorized domains in your Firebase Console.`);
+      } else if (e.message) {
+        console.warn('Redirect sign-in error:', e.message);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (isDark) {
@@ -173,14 +291,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const toggleTheme = () => setIsDark(prev => !prev);
 
   // ── Auth Methods (Firebase when ready, simulated fallback) ──────────────
-
-  const navigateAfterAuth = () => {
-    if (userProfile?.completedOnboarding) {
-      setScreen('home');
-    } else {
-      setScreen('onboarding');
-    }
-  };
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
@@ -260,14 +370,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const loginAsGuest = () => {
+    const uid = 'guest_' + Date.now();
+    localStorage.setItem(GUEST_UID_KEY, uid);
     setUser({
-      uid: 'guest_' + Date.now(),
+      uid,
       name: 'Guest User',
       email: 'guest@schemesetu.in',
       isGuest: true,
       provider: 'guest',
     });
-    // Try to restore saved guest profile
     try {
       const saved = localStorage.getItem(GUEST_PROFILE_KEY);
       if (saved) {
@@ -286,10 +397,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       if (isFirebaseReady()) {
-        const { signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
+        const { signInWithPopup, signInWithRedirect, GoogleAuthProvider } = await import('firebase/auth');
         const auth = getAuthInstance();
         const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
+        if (isMobileDevice()) {
+          await signInWithRedirect(auth, provider);
+        } else {
+          await signInWithPopup(auth, provider);
+        }
       } else {
         setUser({
           uid: 'google_' + Date.now(),
@@ -305,11 +420,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const e = err as { code?: string; message?: string };
       console.error('Google login error:', e);
       if (e.code === 'auth/popup-closed-by-user') return;
+      if (e.code === 'auth/redirect-cancelled') return;
       const messages: Record<string, string> = {
         'auth/popup-blocked': 'Pop-up was blocked. Please allow pop-ups for this site.',
+        'auth/redirect-cancelled': 'Sign-in was cancelled. Please try again.',
         'auth/unauthorized-domain': `Add "${window.location.hostname}" to Firebase Auth → Authorized domains in your Firebase Console.`,
       };
-      alert(messages[e.code as string] || e.message || 'Google login failed.');
+      alert(messages[e.code as string] || e.message || 'Google login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -324,15 +441,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
     } catch (err) {
       console.error('Logout error:', err);
     }
+    localStorage.removeItem(GUEST_UID_KEY);
+    localStorage.removeItem(GUEST_PROFILE_KEY);
     setUser(null);
     setUserProfile(null);
     setSavedSchemes([]);
+    setIsAuthenticated(false);
+    setIsAuthLoading(false);
     setScreen('login');
   };
 
   const refreshProfile = async () => {
     if (user && !user.isGuest) {
-      await loadProfile(user.uid);
+      setProfileLoading(true);
+      try {
+        const profile = await loadProfile(user.uid);
+        if (profile) setUserProfile(profile);
+      } finally {
+        setProfileLoading(false);
+      }
     }
   };
 
@@ -355,14 +482,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const toggleSave = useCallback(async (schemeId: string) => {
     const isCurrentlySaved = savedSchemes.includes(schemeId);
 
-    // Optimistic update
     setSavedSchemes(prev =>
       isCurrentlySaved
         ? prev.filter(id => id !== schemeId)
         : [...prev, schemeId]
     );
 
-    // Sync to Firestore if logged in
     if (isFirebaseReady() && user && !user.isGuest) {
       await firestore.toggleBookmark(user.uid, schemeId);
     }
@@ -388,6 +513,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setLanguage,
         user,
         userProfile,
+        isAuthLoading,
+        isAuthenticated,
         login,
         signup,
         loginAsGuest,
@@ -403,6 +530,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         unreadCount,
         setUnreadCount,
         isLoading,
+        profileLoading,
       }}
     >
       {children}

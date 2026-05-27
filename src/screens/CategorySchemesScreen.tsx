@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { ChevronLeft, SlidersHorizontal, Target } from 'lucide-react';
+import { ChevronLeft, Target } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BottomNav } from '../components/ui/BottomNav';
 import { SchemeCard } from '../components/ui/SchemeCard';

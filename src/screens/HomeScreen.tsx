@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, Bell, Sparkles, TrendingUp, ChevronRight, Target, ArrowRight, Bookmark, BookmarkCheck } from 'lucide-react';
+import { Search, Bell, Sparkles, TrendingUp, ChevronRight, Target, Bookmark, BookmarkCheck } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BottomNav } from '../components/ui/BottomNav';
 import { SchemeCard } from '../components/ui/SchemeCard';
@@ -7,9 +7,9 @@ import { CategoryCard } from '../components/ui/CategoryCard';
 import { SchemeCardSkeleton, CategorySkeleton } from '../components/ui/Skeleton';
 import { motion } from 'framer-motion';
 import { OCCUPATIONS } from '../types/profile';
-import { getCategories, getFeaturedSchemes, getStats, searchSchemes, getScoredSchemes, getMatchColor } from '../services/schemeService';
+import { getCategories, getFeaturedSchemes, getStats, searchSchemes, getScoredSchemes } from '../services/schemeService';
 import type { AppStats, Scheme, CategoryStats } from '../services/firestoreService';
-import type { ScoredScheme, MatchResult } from '../services/schemeService';
+import type { ScoredScheme } from '../services/schemeService';
 
 function getGreeting() {
   const h = new Date().getHours();

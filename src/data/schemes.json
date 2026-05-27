@@ -68,7 +68,10 @@
     "categories": [
       "farmers",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmkisan.gov.in",
+    "ministryLink": "https://agriculture.gov.in"
   },
   {
     "id": "pm-scholarship-scheme",
@@ -140,7 +143,10 @@
       "skill-development",
       "students",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://scholarships.gov.in",
+    "ministryLink": "https://www.education.gov.in"
   },
   {
     "id": "pm-ujjwala-yojana",
@@ -212,7 +218,10 @@
     "categories": [
       "housing",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmuy.gov.in",
+    "ministryLink": "https://petroleum.nic.in"
   },
   {
     "id": "startup-india-seed-fund",
@@ -285,7 +294,10 @@
       "farmers",
       "startup",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://startupindia.gov.in",
+    "ministryLink": "https://dpiit.gov.in"
   },
   {
     "id": "ayushman-bharat-pm-jay",
@@ -358,7 +370,10 @@
     "disabilityEligible": false,
     "categories": [
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmjay.gov.in",
+    "ministryLink": "https://main.mohfw.gov.in"
   },
   {
     "id": "pm-mudra-yojana",
@@ -426,7 +441,10 @@
     "disabilityEligible": false,
     "categories": [
       "business"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://mudra.org.in",
+    "ministryLink": "https://www.financialservices.gov.in"
   },
   {
     "id": "national-apprenticeship-promotion",
@@ -500,7 +518,10 @@
       "skill-development",
       "students",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://apprenticeshipindia.gov.in",
+    "ministryLink": "https://skilldevelopment.gov.in"
   },
   {
     "id": "beti-bachao-beti-padhao",
@@ -572,7 +593,10 @@
       "education",
       "students",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://wcd.nic.in/bbbp-schemes",
+    "ministryLink": "https://wcd.nic.in"
   },
   {
     "id": "pm-fasal-bima-yojana",
@@ -640,7 +664,10 @@
     "categories": [
       "farmers",
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmfby.gov.in",
+    "ministryLink": "https://agriculture.gov.in"
   },
   {
     "id": "sukanya-samriddhi-yojana",
@@ -711,7 +738,10 @@
     "disabilityEligible": false,
     "categories": [
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://www.indiapost.gov.in",
+    "ministryLink": "https://www.financialservices.gov.in"
   },
   {
     "id": "pm-svanidhi-scheme",
@@ -779,7 +809,10 @@
     "categories": [
       "business",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmsvanidhi.mohua.gov.in",
+    "ministryLink": "https://mohua.gov.in"
   },
   {
     "id": "pm-kaushal-vikas-yojana",
@@ -811,7 +844,7 @@
     "amount": "Free Training",
     "isNew": false,
     "isPopular": true,
-    "applicationUrl": "https://pmkvyofficial.org",
+    "applicationUrl": "https://skillindia.gov.in",
     "tags": [
       "jobs",
       "skill",
@@ -852,7 +885,10 @@
       "skill-development",
       "students",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://skillindia.gov.in",
+    "ministryLink": "https://skilldevelopment.gov.in"
   },
   {
     "id": "pm-gramin-awas-yojana",
@@ -925,7 +961,10 @@
     "disabilityEligible": false,
     "categories": [
       "housing"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmayg.nic.in",
+    "ministryLink": "https://rural.nic.in"
   },
   {
     "id": "pm-matru-vandana-yojana",
@@ -998,7 +1037,10 @@
     "categories": [
       "health",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://wcd.nic.in/schemes/pmmvy",
+    "ministryLink": "https://wcd.nic.in"
   },
   {
     "id": "national-social-assistance-programme",
@@ -1068,7 +1110,10 @@
       "disability",
       "pension",
       "senior"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://nsap.nic.in",
+    "ministryLink": "https://rural.nic.in"
   },
   {
     "id": "stand-up-india",
@@ -1142,7 +1187,10 @@
       "business",
       "startup",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://standupmitra.in",
+    "ministryLink": "https://www.financialservices.gov.in"
   },
   {
     "id": "pm-jan-dhan-yojana",
@@ -1213,7 +1261,10 @@
     "disabilityEligible": false,
     "categories": [
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmjdy.gov.in",
+    "ministryLink": "https://www.financialservices.gov.in"
   },
   {
     "id": "pm-poshan-shakti-nirman",
@@ -1287,7 +1338,10 @@
       "students",
       "subsidy",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://wcd.nic.in",
+    "ministryLink": "https://wcd.nic.in"
   },
   {
     "id": "pm-vishwakarma-scheme",
@@ -1359,7 +1413,10 @@
       "education",
       "skill-development",
       "students"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmvishwakarma.gov.in",
+    "ministryLink": "https://msme.gov.in"
   },
   {
     "id": "kisan-credit-card",
@@ -1429,7 +1486,10 @@
     "categories": [
       "business",
       "farmers"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmkisan.gov.in",
+    "ministryLink": "https://agriculture.gov.in"
   },
   {
     "id": "pm-kisan-maan-dhan-yojana",
@@ -1499,7 +1559,10 @@
       "farmers",
       "pension",
       "senior"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://maandhan.in",
+    "ministryLink": "https://agriculture.gov.in"
   },
   {
     "id": "national-scholarship-portal",
@@ -1572,7 +1635,10 @@
       "education",
       "students",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://scholarships.gov.in",
+    "ministryLink": "https://www.education.gov.in"
   },
   {
     "id": "pm-employment-generation-programme",
@@ -1646,7 +1712,10 @@
       "business",
       "jobs",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmegp.kviconline.gov.in",
+    "ministryLink": "https://msme.gov.in"
   },
   {
     "id": "rashtriya-swasthya-bima-yojana",
@@ -1718,7 +1787,10 @@
     "disabilityEligible": false,
     "categories": [
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://rsby.gov.in",
+    "ministryLink": "https://main.mohfw.gov.in"
   },
   {
     "id": "atal-pension-yojana",
@@ -1796,7 +1868,10 @@
     "categories": [
       "pension",
       "senior"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://npscra.nsdl.co.in/nsdl/APY/Index",
+    "ministryLink": "https://financialservices.gov.in"
   },
   {
     "id": "pradhan-mantri-suraksha-bima-yojana",
@@ -1873,7 +1948,10 @@
     "categories": [
       "disability",
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://financialservices.gov.in/insurance-divisions/Government-Sponsored-Socially-Oriented-Insurance-Schemes/PMSBY",
+    "ministryLink": "https://financialservices.gov.in"
   },
   {
     "id": "pradhan-mantri-jeevan-jyoti-bima-yojana",
@@ -1949,7 +2027,10 @@
     "disabilityEligible": false,
     "categories": [
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://financialservices.gov.in/insurance-divisions/Government-Sponsored-Socially-Oriented-Insurance-Schemes/PMJJBY",
+    "ministryLink": "https://financialservices.gov.in"
   },
   {
     "id": "deen-dayal-upadhyaya-grameen-kaushalya-yojana",
@@ -2033,7 +2114,10 @@
       "jobs",
       "skill-development",
       "students"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://ddugky.gov.in",
+    "ministryLink": "https://rural.nic.in"
   },
   {
     "id": "deen-dayal-antyodaya-yojana-national-rural-livelihoods-mission",
@@ -2116,7 +2200,10 @@
       "jobs",
       "subsidy",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://www.aajeevika.gov.in",
+    "ministryLink": "https://rural.nic.in"
   },
   {
     "id": "swachh-bharat-mission-phase-ii",
@@ -2190,7 +2277,9 @@
     "disabilityEligible": false,
     "categories": [
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://swachhbharatmission.gov.in"
   },
   {
     "id": "national-health-mission",
@@ -2271,7 +2360,9 @@
     "categories": [
       "health",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://nhm.gov.in"
   },
   {
     "id": "anganwadi-services-integrated-child-development-services",
@@ -2353,7 +2444,9 @@
       "housing",
       "students",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://icds-wcd.nic.in"
   },
   {
     "id": "pm-poshan-formerly-mid-day-meal-scheme",
@@ -2428,7 +2521,9 @@
     "categories": [
       "education",
       "students"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmposhan.education.gov.in"
   },
   {
     "id": "samagra-shiksha-abhiyan",
@@ -2510,7 +2605,9 @@
       "skill-development",
       "students",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://samagra.education.gov.in"
   },
   {
     "id": "pradhan-mantri-bhartiya-janaushadhi-pariyojana",
@@ -2586,7 +2683,9 @@
     "disabilityEligible": false,
     "categories": [
       "health"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://janaushadhi.gov.in"
   },
   {
     "id": "saubhagya-yojana-pradhan-mantri-sahaj-bijli-har-ghar-yojana",
@@ -2663,7 +2762,10 @@
     "categories": [
       "housing",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://saubhagya.gov.in",
+    "ministryLink": "https://powermin.gov.in"
   },
   {
     "id": "jal-jeevan-mission",
@@ -2738,7 +2840,9 @@
     "categories": [
       "housing",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://jaljeevanmission.gov.in"
   },
   {
     "id": "national-ayush-mission",
@@ -2819,7 +2923,10 @@
       "health",
       "housing",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://namayush.gov.in",
+    "ministryLink": "https://ayush.gov.in"
   },
   {
     "id": "pradhan-mantri-kisan-sampada-yojana",
@@ -2901,7 +3008,10 @@
       "business",
       "farmers",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmksy.gov.in",
+    "ministryLink": "https://mofpi.nic.in"
   },
   {
     "id": "smart-cities-mission",
@@ -2974,7 +3084,9 @@
     "disabilityEligible": false,
     "categories": [
       "housing"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://smartcities.gov.in"
   },
   {
     "id": "pradhan-mantri-gramin-digital-saksharta-abhiyan",
@@ -3055,7 +3167,9 @@
       "education",
       "housing",
       "skill-development"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://www.pmgdisha.in"
   },
   {
     "id": "mission-indradhanush",
@@ -3087,7 +3201,7 @@
     "deadline": "Ongoing in phases (Intensified Mission Indradhanush 5.0 completed; new phases announced)",
     "isNew": true,
     "isPopular": false,
-    "applicationUrl": "https://main.mohfw.gov.in/‌major-programmes/universal-immunization-programme/mission-indradhanush",
+    "applicationUrl": "https://main.mohfw.gov.in/major-programmes/universal-immunization-programme/mission-indradhanush",
     "tags": [
       "immunization",
       "vaccination",
@@ -3133,7 +3247,9 @@
     "categories": [
       "health",
       "women"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://main.mohfw.gov.in/major-programmes/universal-immunization-programme/mission-indradhanush"
   },
   {
     "id": "pradhan-mantri-gram-sadak-yojana",
@@ -3209,7 +3325,10 @@
     "disabilityEligible": false,
     "categories": [
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://pmgsy.gov.in",
+    "ministryLink": "https://rural.nic.in"
   },
   {
     "id": "rashtriya-uchchatar-shiksha-abhiyan",
@@ -3286,6 +3405,8 @@
       "education",
       "students",
       "subsidy"
-    ]
+    ],
+    "verificationStatus": "verified",
+    "officialLink": "https://rusa.gov.in"
   }
 ]

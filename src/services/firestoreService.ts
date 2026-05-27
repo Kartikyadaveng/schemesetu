@@ -44,6 +44,9 @@ export interface Scheme {
   isNew: boolean;
   isPopular: boolean;
   applicationUrl: string;
+  officialLink?: string;
+  ministryLink?: string;
+  verificationStatus?: 'verified' | 'needs-review' | 'unverified';
   tags: string[];
   state: string;
   searchKeywords: string[];
@@ -544,6 +547,9 @@ function docToScheme(doc: DocumentSnapshot | QueryDocumentSnapshot): Scheme {
     isNew: data.isNew || false,
     isPopular: data.isPopular || false,
     applicationUrl: data.applicationUrl || '',
+    officialLink: data.officialLink || data.applicationUrl || '',
+    ministryLink: data.ministryLink || '',
+    verificationStatus: data.verificationStatus || 'unverified',
     tags: data.tags || [],
     state: data.state || '',
     searchKeywords: data.searchKeywords || [],

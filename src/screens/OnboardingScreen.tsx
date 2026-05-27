@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Check, Sparkles } from 'lucide-react';
-import { useApp, type UserProfileData } from '../context/AppContext';
+import { useApp } from '../context/AppContext';
 import { OCCUPATIONS, INDIAN_STATES, type Occupation } from '../types/profile';
 
 const stepVariants = {
@@ -168,7 +168,7 @@ function buildQuestions(occupation: Occupation): { key: string; label: string; t
 }
 
 export function OnboardingScreen() {
-  const { isDark, setScreen, user, completeOnboarding } = useApp();
+  const { isDark, setScreen, completeOnboarding } = useApp();
   const [step, setStep] = useState(0);
   const [occupation, setOccupation] = useState<Occupation | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -176,7 +176,6 @@ export function OnboardingScreen() {
   const questions = useMemo(() => occupation ? buildQuestions(occupation) : [], [occupation]);
 
   const totalSteps = occupation ? 1 + questions.length : 1;
-  const currentStep = occupation ? 1 + questions.filter((_, i) => answers[_.key] !== undefined).length : 0;
   const progress = totalSteps > 0 ? Math.min((step / (totalSteps)) * 100, 100) : 0;
 
   const canProceed = () => {

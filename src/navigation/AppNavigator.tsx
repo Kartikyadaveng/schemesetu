@@ -35,7 +35,16 @@ const splashVariants = {
 };
 
 export function AppNavigator() {
-  const { currentScreen } = useApp();
+  const { currentScreen, isAuthLoading } = useApp();
+
+  // ── HARD AUTH GATE ───────────────────────────────────────────────
+  // While Firebase is resolving the session, ALWAYS render the splash
+  // screen. NEVER render any other screen (especially the login screen)
+  // during this phase.
+  // ──────────────────────────────────────────────────────────────────
+  if (isAuthLoading) {
+    return <SplashScreen />;
+  }
 
   const renderScreen = () => {
     switch (currentScreen) {

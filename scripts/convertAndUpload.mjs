@@ -633,7 +633,7 @@ const newSchemesRaw = [
     ],
     "deadline": "Ongoing in phases (Intensified Mission Indradhanush 5.0 completed; new phases announced)",
     "ministry": "Ministry of Health and Family Welfare",
-    "officialLink": "https://main.mohfw.gov.in/‌major-programmes/universal-immunization-programme/mission-indradhanush",
+    "officialLink": "https://main.mohfw.gov.in/major-programmes/universal-immunization-programme/mission-indradhanush",
     "tags": ["immunization", "vaccination", "children health", "polio", "measles", "tetanus", "india child health", "vaccine"],
     "state": "All India (high-priority districts)",
     "searchKeywords": ["mission indradhanush", "immunization drive", "free vaccination", "children vaccine", "pregnancy vaccination", "imi"]

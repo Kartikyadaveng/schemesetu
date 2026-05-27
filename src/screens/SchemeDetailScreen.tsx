@@ -2,16 +2,17 @@ import { useState, useEffect, useMemo } from 'react';
 import {
   ChevronLeft, Bookmark, BookmarkCheck, Share2,
   CheckCircle2, FileText, Calendar, ExternalLink,
-  IndianRupee, Building2, Tag, Target
+  IndianRupee, Building2, Tag, AlertTriangle,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { BottomNav } from '../components/ui/BottomNav';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { CATEGORY_COLORS } from '../constants/colors';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getSchemeById } from '../services/schemeService';
 import { calculateMatch, getEligibilityColor, getEligibilityBg } from '../services/eligibilityEngine';
+import { isValidOfficialUrl, getDomainHint, getMySchemeFallbackUrl } from '../utils/linkValidator';
 import type { Scheme } from '../services/firestoreService';
 
 const CATEGORY_EMOJIS: Record<string, string> = {
@@ -25,6 +26,34 @@ export function SchemeDetailScreen() {
   const schemeId = screenParams.schemeId as string;
   const [scheme, setScheme] = useState<Scheme | null>(null);
   const [loading, setLoading] = useState(true);
+  const [confirmUrl, setConfirmUrl] = useState<string | null>(null);
+  const [linkLoading, setLinkLoading] = useState(false);
+
+  const openExternalLink = (url: string) => {
+    setLinkLoading(true);
+    setTimeout(() => {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setLinkLoading(false);
+    }, 150);
+  };
+
+  const handleApplyClick = () => {
+    if (!scheme) return;
+    const url = scheme.officialLink || scheme.applicationUrl;
+    if (!url) return;
+    if (isValidOfficialUrl(url)) {
+      setConfirmUrl(url);
+    } else {
+      openExternalLink(url);
+    }
+  };
+
+  const handleConfirmNavigation = () => {
+    if (confirmUrl) {
+      openExternalLink(confirmUrl);
+      setConfirmUrl(null);
+    }
+  };
 
   const matchResult = useMemo(() => {
     if (!scheme || !userProfile?.occupation) return null;
@@ -342,15 +371,49 @@ export function SchemeDetailScreen() {
           transition={{ delay: 0.4 }}
           className="pb-4"
         >
-          <Button
-            variant="primary"
-            size="xl"
-            fullWidth
-            rightIcon={<ExternalLink size={18} />}
-            onClick={() => window.open(scheme.applicationUrl, '_blank')}
-          >
-            Apply Now — Official Portal
-          </Button>
+          {scheme.applicationUrl ? (
+            <>
+              <Button
+                variant="primary"
+                size="xl"
+                fullWidth
+                isLoading={linkLoading}
+                rightIcon={<ExternalLink size={18} />}
+                onClick={handleApplyClick}
+              >
+                Apply Now — Official Portal
+              </Button>
+              <p className={`text-xs mt-1.5 text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                <ExternalLink size={10} className="inline mr-0.5" />
+                {getDomainHint(scheme.officialLink || scheme.applicationUrl)} — Government Website
+              </p>
+            </>
+          ) : (
+            <div className={`p-4 rounded-2xl ${isDark ? 'bg-gray-800' : 'bg-orange-50 border border-orange-200'}`}>
+              <div className="flex items-start gap-3">
+                <AlertTriangle size={20} className="text-orange-500 mt-0.5 shrink-0" />
+                <div>
+                  <p className={`text-sm font-semibold ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
+                    Apply link not available
+                  </p>
+                  <p className={`text-xs mt-1 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                    Visit{' '}
+                    <a
+                      href={getMySchemeFallbackUrl(scheme.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold underline"
+                      style={{ color: '#FF6B35' }}
+                    >
+                      myScheme.gov.in
+                    </a>{' '}
+                    to search for this scheme.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           <Button
             variant="outline"
             size="lg"
@@ -362,6 +425,64 @@ export function SchemeDetailScreen() {
             {saved ? 'Saved to Bookmarks ✓' : 'Save for Later'}
           </Button>
         </motion.div>
+
+        {/* External Link Confirmation Dialog */}
+        <AnimatePresence>
+          {confirmUrl && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center px-6"
+              style={{ background: 'rgba(0,0,0,0.5)' }}
+              onClick={() => setConfirmUrl(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className={`w-full max-w-sm rounded-3xl p-6 ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+                onClick={e => e.stopPropagation()}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#FF6B3515' }}>
+                    <ExternalLink size={20} style={{ color: '#FF6B35' }} />
+                  </div>
+                  <div>
+                    <h3 className={`font-bold text-base ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                      Leave SchemeSetu?
+                    </h3>
+                    <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                      You'll be redirected to an official government website
+                    </p>
+                  </div>
+                </div>
+                <p className={`text-sm mb-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  <ExternalLink size={12} className="inline mr-1" />
+                  {getDomainHint(confirmUrl)}
+                </p>
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    size="md"
+                    className="flex-1"
+                    onClick={() => setConfirmUrl(null)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="md"
+                    className="flex-1"
+                    onClick={handleConfirmNavigation}
+                  >
+                    Continue
+                  </Button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <BottomNav />

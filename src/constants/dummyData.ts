@@ -20,6 +20,9 @@ export interface Scheme {
   isNew?: boolean;
   isPopular?: boolean;
   applicationUrl: string;
+  officialLink?: string;
+  ministryLink?: string;
+  verificationStatus?: 'verified' | 'needs-review' | 'unverified';
   image?: string;
   tags: string[];
   state?: string;
@@ -87,6 +90,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'प्रधानमंत्री छात्रवृत्ति योजना',
     ministry: 'Ministry of Education',
     category: 'students',
+    categories: ['students', 'education'],
     shortDesc: 'Scholarships for wards of ex-servicemen & RPF personnel.',
     description:
       'The PM Scholarship Scheme provides financial assistance to the widows and wards of ex-servicemen and RPF/RPSF personnel for professional degree courses.',
@@ -121,6 +125,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'प्रधानमंत्री उज्ज्वला योजना',
     ministry: 'Ministry of Petroleum & Natural Gas',
     category: 'women',
+    categories: ['women', 'subsidy'],
     shortDesc: 'Free LPG connections to BPL women households.',
     description:
       'PMUY aims to provide free LPG gas connections to women from Below Poverty Line (BPL) households to replace traditional unclean cooking fuels.',
@@ -153,6 +158,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'स्टार्टअप इंडिया सीड फंड',
     ministry: 'DPIIT, Ministry of Commerce',
     category: 'business',
+    categories: ['business', 'startup'],
     shortDesc: 'Up to ₹50 lakh funding for early-stage startups.',
     description:
       'The Startup India Seed Fund Scheme provides financial assistance for proof of concept, prototype development, product trials, market entry, and commercialization.',
@@ -187,6 +193,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'आयुष्मान भारत पीएम-जेएवाई',
     ministry: 'Ministry of Health & Family Welfare',
     category: 'health',
+    categories: ['health', 'subsidy'],
     shortDesc: '₹5 lakh health cover for 55 crore+ beneficiaries.',
     description:
       'Pradhan Mantri Jan Arogya Yojana provides health coverage of ₹5 lakh per family per year for secondary and tertiary hospitalization.',
@@ -219,6 +226,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'प्रधानमंत्री मुद्रा योजना',
     ministry: 'Ministry of Finance',
     category: 'business',
+    categories: ['business', 'subsidy'],
     shortDesc: 'Loans up to ₹10 lakh for small business owners.',
     description:
       'PMMY provides collateral-free micro-loans to non-corporate, non-farm small/micro enterprises through Shishu, Kishor, and Tarun loan categories.',
@@ -254,6 +262,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'राष्ट्रीय प्रशिक्षुता संवर्धन योजना',
     ministry: 'Ministry of Skill Development',
     category: 'jobs',
+    categories: ['jobs', 'skill-development'],
     shortDesc: 'Stipend support for apprentices in industry training.',
     description:
       'NAPS promotes apprenticeship training by sharing 25% of stipend cost (max ₹1,500/month) with employers to increase apprentice engagement in industries.',
@@ -287,6 +296,7 @@ export const DUMMY_SCHEMES: Scheme[] = [
     nameHindi: 'बेटी बचाओ बेटी पढ़ाओ',
     ministry: 'Ministry of Women & Child Development',
     category: 'women',
+    categories: ['women', 'education'],
     shortDesc: 'Promoting welfare, education and survival of girl child.',
     description:
       'BBBP scheme aims to address declining child sex ratio and related issues of women empowerment through multi-sectoral action in 405 districts of India.',

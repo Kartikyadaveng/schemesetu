@@ -4,7 +4,7 @@
 // ============================================================
 
 import {
-  User, Globe, Moon, Sun, LogOut, ChevronRight,
+  Globe, Moon, Sun, LogOut, ChevronRight,
   Shield, HelpCircle, Share2, Star, Info,
   Bell, Bookmark, Sparkles, Edit3
 } from 'lucide-react';
