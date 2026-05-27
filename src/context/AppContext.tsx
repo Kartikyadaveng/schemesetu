@@ -143,7 +143,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const fbReady = initFirebase();
 
     if (!fbReady) {
-      // Firebase not configured — restore guest or go straight to login
       const guestUid = localStorage.getItem(GUEST_UID_KEY);
       const savedProfile = localStorage.getItem(GUEST_PROFILE_KEY);
       if (guestUid && savedProfile) {
@@ -170,37 +169,52 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
 
     // Subscribe to post-init auth events (login, logout, token expiry)
+    // IMPORTANT: This handler does NOT reset profile/bookmarks or navigate
+    // on user — authStateReady below already did all the work.
+    // It only handles REAL sign-out (not initialization null fires).
     const unsub = onAuthChange((firebaseUser) => {
       if (!authInitDone.current) return;
 
       if (firebaseUser) {
-        const appUser = makeUser(firebaseUser);
-        setUser(appUser);
+        setUser(makeUser(firebaseUser));
         setIsAuthenticated(true);
-        setUserProfile(null);
-        setSavedSchemes([]);
-        setCurrentScreen('home');
-        loadProfile(firebaseUser.uid).then(profile => {
-          if (profile) setUserProfile(profile);
-          setCurrentScreen(profile?.completedOnboarding ? 'home' : 'onboarding');
-        });
-        firestore.getUserBookmarks(firebaseUser.uid).then(b => setSavedSchemes(b)).catch(() => {});
       } else {
+        cleanupListeners();
+        localStorage.removeItem(GUEST_UID_KEY);
+        localStorage.removeItem(GUEST_PROFILE_KEY);
+        localStorage.removeItem(GUEST_SAVED_KEY);
+        localStorage.removeItem(GUEST_NOTIF_KEY);
         setUser(null);
         setUserProfile(null);
         setSavedSchemes([]);
+        setNotifications([]);
         setIsAuthenticated(false);
         setCurrentScreen('login');
       }
     });
 
-    // Wait for Firebase to resolve the initial auth state
+    // Process redirect result + resolve initial auth state in one flow
     getAuthInstance().authStateReady().then(async () => {
       const currentUser = getAuthInstance().currentUser;
 
       if (currentUser) {
         localStorage.removeItem(GUEST_UID_KEY);
         localStorage.removeItem(GUEST_PROFILE_KEY);
+
+        // Process any pending redirect result (for credential info, not auth state)
+        try {
+          const result = await handleRedirectResult();
+          if (result) {
+            console.log('Redirect sign-in result:', result.user.email);
+          }
+        } catch (e) {
+          const err = e as { code?: string; message?: string };
+          if (err.code === 'auth/unauthorized-domain') {
+            alert(`Add "${window.location.hostname}" to Firebase Auth → Authorized domains in your Firebase Console.`);
+          } else if (err.message && err.code !== 'auth/redirect-cancelled') {
+            console.warn('Redirect sign-in error:', err.message);
+          }
+        }
 
         const appUser = makeUser(currentUser);
         setUser(appUser);
@@ -221,15 +235,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const profile = await loadProfile(currentUser.uid);
         if (profile) setUserProfile(profile);
 
-        // Set up real-time listeners
         setupListeners(currentUser.uid);
 
-        // ── Everything loaded — navigate and unlock in one batch ──
         authInitDone.current = true;
         setIsAuthLoading(false);
         setCurrentScreen(profile?.completedOnboarding ? 'home' : 'onboarding');
       } else {
-        // No Firebase user — attempt guest restore
         const guestUid = localStorage.getItem(GUEST_UID_KEY);
         const savedProfile = localStorage.getItem(GUEST_PROFILE_KEY);
         if (guestUid && savedProfile) {
@@ -252,7 +263,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
           }
         }
 
-        // Guest without completed onboarding or no guest at all
         localStorage.removeItem(GUEST_UID_KEY);
         setUser(null);
         setUserProfile(null);
@@ -266,26 +276,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       unsub();
       cleanupListeners();
     };
-  }, []);
-
-  // Handle Google redirect result (mobile) — catches errors from redirect flow
-  useEffect(() => {
-    if (!isFirebaseReady()) return;
-
-    handleRedirectResult().then((result) => {
-      if (result) {
-        console.log('Redirect sign-in successful');
-      }
-    }).catch((err: unknown) => {
-      const e = err as { code?: string; message?: string };
-      if (e.code === 'auth/popup-closed-by-user') return;
-      if (e.code === 'auth/redirect-cancelled') return;
-      if (e.code === 'auth/unauthorized-domain') {
-        alert(`Add "${window.location.hostname}" to Firebase Auth → Authorized domains in your Firebase Console.`);
-      } else if (e.message) {
-        console.warn('Redirect sign-in error:', e.message);
-      }
-    });
   }, []);
 
   useEffect(() => {
