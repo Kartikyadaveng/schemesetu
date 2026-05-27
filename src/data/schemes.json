@@ -1,0 +1,3291 @@
+[
+  {
+    "id": "pm-kisan-samman-nidhi",
+    "name": "PM Kisan Samman Nidhi",
+    "nameHindi": "पीएम किसान सम्मान निधि",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "category": "farmers",
+    "shortDesc": "₹6,000/year direct income support to all farmer families.",
+    "description": "The Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) scheme provides income support of ₹6,000 per year to all land-holding farmer families across India. The amount is transferred in three equal installments of ₹2,000 each every four months directly to the bank accounts of beneficiaries.",
+    "benefits": [
+      "₹6,000 per year directly to bank account",
+      "₹2,000 every 4 months in 3 installments",
+      "Direct Benefit Transfer (DBT) mode",
+      "No middlemen — direct to farmer bank account",
+      "Covers all land-holding farmer families"
+    ],
+    "eligibility": [
+      "Must be a farmer or farmer family",
+      "Should own cultivable land",
+      "Valid Aadhaar card required",
+      "Active bank account linked to Aadhaar",
+      "Not a government employee or income taxpayer"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Bank Passbook / Account Number",
+      "Land Ownership Documents (Khasra/Khatauni)",
+      "Mobile Number linked to Aadhaar"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "₹6,000/year",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmkisan.gov.in",
+    "tags": [
+      "farmers",
+      "income support",
+      "agriculture",
+      "DBT",
+      "landholding"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "pm kisan",
+      "kisan samman",
+      "farmer income",
+      "₹6000",
+      "kisaan"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "farmers",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "pm-scholarship-scheme",
+    "name": "PM Scholarship Scheme",
+    "nameHindi": "प्रधानमंत्री छात्रवृत्ति योजना",
+    "ministry": "Ministry of Education",
+    "category": "students",
+    "shortDesc": "Scholarships for wards of ex-servicemen & RPF personnel.",
+    "description": "The PM Scholarship Scheme provides financial assistance to the widows and wards of ex-servicemen and RPF/RPSF personnel who are pursuing professional degree courses. The scholarship aims to support higher education for the families of those who served the nation.",
+    "benefits": [
+      "₹2,500/month for boys",
+      "₹3,000/month for girls",
+      "Covers professional degree courses",
+      "Renewable every year on passing"
+    ],
+    "eligibility": [
+      "Ward or widow of Ex-Serviceman / RPF personnel",
+      "Minimum 60% marks in last qualifying exam",
+      "Pursuing 1st year of professional degree",
+      "Age between 18-25 years"
+    ],
+    "documents": [
+      "Ex-Serviceman certificate",
+      "Aadhaar Card",
+      "Marksheet of last exam",
+      "Admission letter from college",
+      "Bank account details"
+    ],
+    "deadline": "31 October 2025",
+    "amount": "₹36,000/year",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://scholarships.gov.in",
+    "tags": [
+      "students",
+      "scholarship",
+      "education",
+      "ex-servicemen",
+      "financial aid"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "scholarship",
+      "ex-servicemen",
+      "student aid",
+      "professional course",
+      "pm scholarship"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": 50,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "skill-development",
+      "students",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "pm-ujjwala-yojana",
+    "name": "PM Ujjwala Yojana",
+    "nameHindi": "प्रधानमंत्री उज्ज्वला योजना",
+    "ministry": "Ministry of Petroleum & Natural Gas",
+    "category": "women",
+    "shortDesc": "Free LPG connections to BPL women households.",
+    "description": "Pradhan Mantri Ujjwala Yojana (PMUY) aims to provide free LPG gas connections to women from Below Poverty Line (BPL) households. This scheme replaces traditional unclean cooking fuels with clean LPG, protecting women from smoke-related diseases.",
+    "benefits": [
+      "Free LPG connection with stove & first refill",
+      "EMI facility for subsequent refills",
+      "Clean cooking fuel",
+      "Protection from smoke-related diseases",
+      "Reduced time spent on fuel collection"
+    ],
+    "eligibility": [
+      "Adult woman from BPL household",
+      "Must not have existing LPG connection",
+      "Ration card or Antyodaya card",
+      "Name on BPL list of state/UT"
+    ],
+    "documents": [
+      "BPL Ration Card",
+      "Aadhaar Card",
+      "Bank Account Details",
+      "Passport Size Photos"
+    ],
+    "deadline": "Open — Rolling Applications",
+    "amount": "Free LPG Connection",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmuy.gov.in",
+    "tags": [
+      "women",
+      "LPG",
+      "BPL",
+      "cooking gas",
+      "clean energy"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "ujjwala",
+      "lpg",
+      "gas connection",
+      "cooking gas free",
+      "bpl women"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "woman",
+      "homemaker"
+    ],
+    "maxIncome": 100000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "General",
+      "ST"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "housing",
+      "women"
+    ]
+  },
+  {
+    "id": "startup-india-seed-fund",
+    "name": "Startup India Seed Fund",
+    "nameHindi": "स्टार्टअप इंडिया सीड फंड",
+    "ministry": "DPIIT, Ministry of Commerce",
+    "category": "business",
+    "shortDesc": "Up to ₹50 lakh funding for early-stage startups.",
+    "description": "The Startup India Seed Fund Scheme provides financial assistance to early-stage startups for proof of concept development, prototype testing, product trials, market entry, and commercialization. It aims to support innovative ideas that need early-stage funding.",
+    "benefits": [
+      "Up to ₹20 lakh for validation/proof of concept",
+      "Up to ₹50 lakh for market entry & commercialization",
+      "Mentorship from expert advisors",
+      "Access to startup ecosystem",
+      "Networking opportunities"
+    ],
+    "eligibility": [
+      "DPIIT recognized startup",
+      "Incorporated ≤ 2 years ago",
+      "Must have innovative product/solution",
+      "Not received more than ₹10 lakh funding from government"
+    ],
+    "documents": [
+      "DPIIT Recognition Certificate",
+      "Business Plan/Pitch Deck",
+      "CA Certified Financial Statements",
+      "MCA Incorporation Certificate",
+      "PAN Card"
+    ],
+    "deadline": "30 September 2025",
+    "amount": "Up to ₹50 Lakh",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://startupindia.gov.in",
+    "tags": [
+      "startup",
+      "business",
+      "funding",
+      "DPIIT",
+      "innovation"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "startup funding",
+      "seed fund",
+      "business grant",
+      "startup india",
+      "entrepreneurship"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "business-owner"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "farmers",
+      "startup",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "ayushman-bharat-pm-jay",
+    "name": "Ayushman Bharat PM-JAY",
+    "nameHindi": "आयुष्मान भारत पीएम-जेएवाई",
+    "ministry": "Ministry of Health & Family Welfare",
+    "category": "health",
+    "shortDesc": "₹5 lakh health cover for 55 crore+ beneficiaries.",
+    "description": "Pradhan Mantri Jan Arogya Yojana (PM-JAY) provides health coverage of ₹5 lakh per family per year for secondary and tertiary hospitalization. It is the world's largest health insurance scheme, covering over 55 crore beneficiaries.",
+    "benefits": [
+      "₹5 lakh annual health cover per family",
+      "Cashless treatment at empanelled hospitals",
+      "Pre & post hospitalization coverage",
+      "Coverage for 1,949 medical procedures",
+      "No premium payment required"
+    ],
+    "eligibility": [
+      "Must be on SECC 2011 database",
+      "Active PMJAY beneficiary as per state list",
+      "Based on deprivation criteria",
+      "Applicable for rural & urban poor"
+    ],
+    "documents": [
+      "Aadhaar Card / VoterID",
+      "Ration Card",
+      "PMJAY e-card (if already registered)"
+    ],
+    "deadline": "Ongoing — No Deadline",
+    "amount": "₹5 Lakh Cover",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmjay.gov.in",
+    "tags": [
+      "health",
+      "insurance",
+      "BPL",
+      "hospitalization",
+      "medical"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "ayushman",
+      "health insurance",
+      "pmjay",
+      "medical cover",
+      "hospitalization free"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": 100000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health"
+    ]
+  },
+  {
+    "id": "pm-mudra-yojana",
+    "name": "PM Mudra Yojana",
+    "nameHindi": "प्रधानमंत्री मुद्रा योजना",
+    "ministry": "Ministry of Finance",
+    "category": "business",
+    "shortDesc": "Loans up to ₹10 lakh for small business owners.",
+    "description": "Pradhan Mantri Mudra Yojana (PMMY) provides collateral-free micro-loans to non-corporate, non-farm small and micro enterprises. The loans are categorized into Shishu (up to ₹50,000), Kishor (₹50,001 to ₹5 lakh), and Tarun (₹5 lakh to ₹10 lakh).",
+    "benefits": [
+      "Shishu: Loans up to ₹50,000",
+      "Kishor: ₹50,001 to ₹5 lakh",
+      "Tarun: ₹5 lakh to ₹10 lakh",
+      "No collateral required",
+      "Low interest rates"
+    ],
+    "eligibility": [
+      "Non-farm income generating activities",
+      "Micro or small enterprise owner",
+      "Good credit history",
+      "Indian citizen with valid ID"
+    ],
+    "documents": [
+      "Aadhaar + PAN Card",
+      "Business Address Proof",
+      "Bank Statements (6 months)",
+      "Business Plan",
+      "2 Passport Photos"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "Up to ₹10 Lakh",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://mudra.org.in",
+    "tags": [
+      "business",
+      "loan",
+      "MSME",
+      "mudra",
+      "collateral free"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "mudra loan",
+      "business loan",
+      "small business",
+      "msme loan",
+      "collateral free loan"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "business-owner"
+    ],
+    "maxIncome": 50000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business"
+    ]
+  },
+  {
+    "id": "national-apprenticeship-promotion",
+    "name": "National Apprenticeship Promotion Scheme",
+    "nameHindi": "राष्ट्रीय प्रशिक्षुता संवर्धन योजना",
+    "ministry": "Ministry of Skill Development",
+    "category": "jobs",
+    "shortDesc": "Stipend support for apprentices in industry training.",
+    "description": "NAPS promotes apprenticeship training by sharing 25% of stipend cost (max ₹1,500/month) with employers. The scheme aims to increase apprentice engagement in industries and provide youth with practical work experience.",
+    "benefits": [
+      "25% stipend reimbursement to employer (max ₹1,500/month)",
+      "Basic training cost reimbursement",
+      "Industry-recognized certificate",
+      "Pathway to regular employment",
+      "Practical work experience"
+    ],
+    "eligibility": [
+      "Aged 14-35 years",
+      "Minimum 5th class pass for some trades",
+      "Enrolled with a registered employer",
+      "Valid Aadhaar Card"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Educational Certificates",
+      "Bank Account Details",
+      "Photograph"
+    ],
+    "deadline": "31 March 2026",
+    "amount": "₹1,500/month stipend support",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://apprenticeshipindia.gov.in",
+    "tags": [
+      "jobs",
+      "apprenticeship",
+      "skill",
+      "youth",
+      "training"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "apprenticeship",
+      "job training",
+      "skill development",
+      "stipend",
+      "industrial training"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "job-seeker",
+      "worker-labourer"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "jobs",
+      "skill-development",
+      "students",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "beti-bachao-beti-padhao",
+    "name": "Beti Bachao Beti Padhao",
+    "nameHindi": "बेटी बचाओ बेटी पढ़ाओ",
+    "ministry": "Ministry of Women & Child Development",
+    "category": "women",
+    "shortDesc": "Promoting welfare, education and survival of girl child.",
+    "description": "Beti Bachao Beti Padhao (BBBP) is a flagship scheme aimed at addressing the declining child sex ratio and related issues of women empowerment through multi-sectoral action in 405 districts across India.",
+    "benefits": [
+      "Improved child sex ratio outcomes",
+      "Scholarships for girl students",
+      "Life skill education programs",
+      "Community awareness campaigns",
+      "Strict enforcement of PC&PNDT Act"
+    ],
+    "eligibility": [
+      "Girl child from birth to 18 years",
+      "Parents/guardians can apply on behalf",
+      "All social categories covered"
+    ],
+    "documents": [
+      "Birth Certificate of girl child",
+      "Parents Aadhaar Card",
+      "Residence Proof"
+    ],
+    "deadline": "Ongoing Program",
+    "amount": "Varies by component",
+    "isNew": false,
+    "isPopular": false,
+    "applicationUrl": "https://wcd.nic.in/bbbp-schemes",
+    "tags": [
+      "women",
+      "girl child",
+      "education",
+      "welfare",
+      "gender equality"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "beti bachao",
+      "girl child",
+      "save girl child",
+      "women empowerment",
+      "child sex ratio"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "woman",
+      "homemaker",
+      "student"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "students",
+      "women"
+    ]
+  },
+  {
+    "id": "pm-fasal-bima-yojana",
+    "name": "PM Fasal Bima Yojana",
+    "nameHindi": "प्रधानमंत्री फसल बीमा योजना",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "category": "farmers",
+    "shortDesc": "Crop insurance at very low premium for farmers.",
+    "description": "PMFBY provides affordable crop insurance to farmers against natural calamities, pests, and diseases. Farmers pay a nominal premium of 2% for kharif crops, 1.5% for rabi crops, and 5% for commercial crops, with the balance subsidized by the government.",
+    "benefits": [
+      "Low premium: 2% kharif, 1.5% rabi, 5% commercial",
+      "Coverage against natural calamities",
+      "Pest and disease outbreak coverage",
+      "Post-harvest losses covered",
+      "Quick claim settlement"
+    ],
+    "eligibility": [
+      "All farmers growing notified crops",
+      "Both loanee and non-loanee farmers",
+      "Valid land records required"
+    ],
+    "documents": [
+      "Land Records",
+      "Aadhaar Card",
+      "Bank Account Details",
+      "Crop details"
+    ],
+    "deadline": "31 December 2025 (Kharif)",
+    "amount": "Subsidized Premium",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmfby.gov.in",
+    "tags": [
+      "farmers",
+      "insurance",
+      "crop",
+      "agriculture",
+      "natural calamity"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "crop insurance",
+      "fasal bima",
+      "farmer insurance",
+      "crop protection",
+      "kharif rabi"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "farmers",
+      "health"
+    ]
+  },
+  {
+    "id": "sukanya-samriddhi-yojana",
+    "name": "Sukanya Samriddhi Yojana",
+    "nameHindi": "सुकन्या समृद्धि योजना",
+    "ministry": "Ministry of Finance",
+    "category": "women",
+    "shortDesc": "Savings scheme for girl child with highest interest rate.",
+    "description": "Sukanya Samriddhi Yojana (SSY) is a small savings scheme for the girl child. Parents can open an account for a girl child below 10 years and earn the highest interest rate among all government small savings schemes, currently 8.2% per annum.",
+    "benefits": [
+      "Highest interest rate among small savings schemes",
+      "Tax benefits under 80C",
+      "Deposits as low as ₹250/year",
+      "Maximum ₹1.5 lakh/year deposit",
+      "Account matures after 21 years or marriage after 18"
+    ],
+    "eligibility": [
+      "Girl child below 10 years of age",
+      "Maximum 2 accounts per family",
+      "Indian citizen",
+      "Parents/guardians can operate"
+    ],
+    "documents": [
+      "Birth Certificate of girl child",
+      "Parents Aadhaar Card",
+      "Residence Proof",
+      "Passport size photos"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "8.2% Interest Rate",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://www.indiapost.gov.in",
+    "tags": [
+      "women",
+      "savings",
+      "girl child",
+      "investment",
+      "tax saving"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "sukanya samriddhi",
+      "girl child savings",
+      "small savings",
+      "tax saving scheme",
+      "highest interest"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "woman",
+      "homemaker"
+    ],
+    "maxIncome": 10,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "women"
+    ]
+  },
+  {
+    "id": "pm-svanidhi-scheme",
+    "name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "nameHindi": "पीएम स्वनिधि योजना",
+    "ministry": "Ministry of Housing & Urban Affairs",
+    "category": "business",
+    "shortDesc": "Working capital loans up to ₹10,000 for street vendors.",
+    "description": "PM SVANidhi provides collateral-free working capital loans of up to ₹10,000 to street vendors to help them resume their livelihoods. The loan carries a subsidized interest rate and timely repayment incentives.",
+    "benefits": [
+      "Initial loan of ₹10,000",
+      "Second loan of ₹20,000 on timely repayment",
+      "Third loan of ₹50,000",
+      "7% interest subsidy on timely repayment",
+      "Digital transaction incentives"
+    ],
+    "eligibility": [
+      "Street vendor as per Town Vending Committee",
+      "Vending certificate or ID proof",
+      "Should have been vending before March 2020"
+    ],
+    "documents": [
+      "Vending Certificate/Identity Card",
+      "Aadhaar Card",
+      "Bank Account",
+      "Mobile Number"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "Up to ₹50,000",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://pmsvanidhi.mohua.gov.in",
+    "tags": [
+      "business",
+      "loan",
+      "street vendor",
+      "working capital",
+      "MSME"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "sva nidhi",
+      "street vendor loan",
+      "vendor scheme",
+      "working capital loan",
+      "pmsvanidhi"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "business-owner"
+    ],
+    "maxIncome": 10000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "women"
+    ]
+  },
+  {
+    "id": "pm-kaushal-vikas-yojana",
+    "name": "PM Kaushal Vikas Yojana",
+    "nameHindi": "प्रधानमंत्री कौशल विकास योजना",
+    "ministry": "Ministry of Skill Development",
+    "category": "jobs",
+    "shortDesc": "Free skill training with certification and placement support.",
+    "description": "PMKVY offers free skill training programs to youth across India with industry-recognized certification and placement assistance. The scheme covers hundreds of job roles across various sectors to make youth employable.",
+    "benefits": [
+      "Free skill training program",
+      "Industry-recognized certificate",
+      "Placement assistance",
+      "Training allowance",
+      "Recognition of Prior Learning (RPL)"
+    ],
+    "eligibility": [
+      "Indian citizen aged 15-45 years",
+      "Minimum 8th pass (varies by course)",
+      "Not a regular ITI/college student"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Educational Certificates",
+      "Bank Account",
+      "Photograph"
+    ],
+    "deadline": "Ongoing — Multiple Batches",
+    "amount": "Free Training",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmkvyofficial.org",
+    "tags": [
+      "jobs",
+      "skill",
+      "training",
+      "certification",
+      "youth"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "kaushal vikas",
+      "skill training",
+      "free training",
+      "vocational training",
+      "job placement"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "job-seeker",
+      "worker-labourer"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "jobs",
+      "skill-development",
+      "students",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "pm-gramin-awas-yojana",
+    "name": "PM Awas Yojana (Gramin)",
+    "nameHindi": "प्रधानमंत्री आवास योजना (ग्रामीण)",
+    "ministry": "Ministry of Rural Development",
+    "category": "housing",
+    "shortDesc": "Housing for all rural poor — pucca house with basic amenities.",
+    "description": "PMAY-G aims to provide a pucca house with basic amenities to all rural families who are houseless or living in dilapidated houses. The scheme provides financial assistance of up to ₹1.20 lakh in plains and ₹1.30 lakh in hilly areas.",
+    "benefits": [
+      "Up to ₹1.20 lakh for house construction",
+      "₹1.30 lakh in hilly/difficult areas",
+      "Top-up of ₹12,000 for toilets under SBM",
+      "Bank loan facility up to ₹70,000",
+      "Joint ownership in wife's name"
+    ],
+    "eligibility": [
+      "Rural household with no pucca house",
+      "Should be on SECC 2011 housing list",
+      "Not a government employee",
+      "Not an income taxpayer"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Ration Card",
+      "SECC certificate",
+      "Land documents",
+      "Bank account"
+    ],
+    "deadline": "Ongoing — Phase-wise",
+    "amount": "Up to ₹1.30 Lakh",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmayg.nic.in",
+    "tags": [
+      "housing",
+      "rural",
+      "home",
+      "construction",
+      "BPL"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "awas yojana",
+      "housing scheme",
+      "rural housing",
+      "pmay gramin",
+      "house construction"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "worker-labourer",
+      "senior-citizen",
+      "homemaker"
+    ],
+    "maxIncome": 1,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "housing"
+    ]
+  },
+  {
+    "id": "pm-matru-vandana-yojana",
+    "name": "PM Matru Vandana Yojana",
+    "nameHindi": "प्रधानमंत्री मातृ वंदना योजना",
+    "ministry": "Ministry of Women & Child Development",
+    "category": "women",
+    "shortDesc": "₹5,000 maternity benefit for pregnant and lactating women.",
+    "description": "PMMVY provides cash incentives of ₹5,000 to pregnant women and lactating mothers for their first living child to compensate for wage loss and ensure proper nutrition and health during pregnancy and lactation.",
+    "benefits": [
+      "₹5,000 in three installments",
+      "Compensation for wage loss",
+      "Encourages institutional delivery",
+      "Promotes proper nutrition",
+      "First child focus"
+    ],
+    "eligibility": [
+      "Pregnant woman or lactating mother",
+      "For first living child",
+      "Age 19 years and above",
+      "Not covered under other similar schemes"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Pregnancy registration card",
+      "Bank account",
+      "MCP card",
+      "Husband's Aadhaar (optional)"
+    ],
+    "deadline": "Ongoing",
+    "amount": "₹5,000",
+    "isNew": false,
+    "isPopular": false,
+    "applicationUrl": "https://wcd.nic.in/schemes/pmmvy",
+    "tags": [
+      "women",
+      "maternity",
+      "health",
+      "pregnancy",
+      "mother"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "matru vandana",
+      "maternity benefit",
+      "pregnancy scheme",
+      "mother scheme",
+      "maternal health"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "woman",
+      "homemaker",
+      "worker-labourer"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health",
+      "women"
+    ]
+  },
+  {
+    "id": "national-social-assistance-programme",
+    "name": "National Social Assistance Programme",
+    "nameHindi": "राष्ट्रीय सामाजिक सहायता कार्यक्रम",
+    "ministry": "Ministry of Rural Development",
+    "category": "senior",
+    "shortDesc": "Pension for elderly, widows, and persons with disabilities.",
+    "description": "NSAP provides financial assistance to elderly persons (60+), widows (40+), and persons with disabilities (18-79 years) belonging to BPL households. It includes Old Age Pension, Widow Pension, and Disability Pension components.",
+    "benefits": [
+      "₹200-500/month Old Age Pension (60+ years)",
+      "₹300/month Widow Pension (40+ years)",
+      "₹300/month Disability Pension",
+      "Additional state government top-ups",
+      "Direct bank transfer"
+    ],
+    "eligibility": [
+      "Must be BPL household",
+      "Age 60+ (Old Age), 40+ (Widow), 18-79 (Disability)",
+      "No other regular income source"
+    ],
+    "documents": [
+      "BPL Ration Card",
+      "Aadhaar Card",
+      "Age proof",
+      "Bank account",
+      "Disability certificate (for disability pension)"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "₹200-500/month",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://nsap.nic.in",
+    "tags": [
+      "senior",
+      "pension",
+      "widow",
+      "disability",
+      "BPL"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "old age pension",
+      "widow pension",
+      "disability pension",
+      "social assistance",
+      "nsap"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "other"
+    ],
+    "maxIncome": 100000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": true,
+    "categories": [
+      "disability",
+      "pension",
+      "senior"
+    ]
+  },
+  {
+    "id": "stand-up-india",
+    "name": "Stand Up India",
+    "nameHindi": "स्टैंड अप इंडिया",
+    "ministry": "Ministry of Finance",
+    "category": "business",
+    "shortDesc": "Bank loans ₹10 lakh to ₹1 crore for SC/ST/Women entrepreneurs.",
+    "description": "Stand Up India scheme facilitates bank loans between ₹10 lakh and ₹1 crore to at least one SC or ST borrower and one woman borrower per bank branch for setting up greenfield enterprises in manufacturing, services, or trading sectors.",
+    "benefits": [
+      "Loan from ₹10 lakh to ₹1 crore",
+      "Composite loan covering 85% of project cost",
+      "Refinance through SIDBI",
+      "Credit guarantee coverage",
+      "Handholding support"
+    ],
+    "eligibility": [
+      "SC, ST or Woman entrepreneur",
+      "Age 18+ years",
+      "Greenfield enterprise in manufacturing/services/trading",
+      "Not a defaulter to any bank"
+    ],
+    "documents": [
+      "Aadhaar + PAN Card",
+      "Caste certificate (for SC/ST)",
+      "Business plan/project report",
+      "Property documents",
+      "Bank statements"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "₹10 Lakh - ₹1 Crore",
+    "isNew": false,
+    "isPopular": false,
+    "applicationUrl": "https://standupmitra.in",
+    "tags": [
+      "business",
+      "loan",
+      "SC/ST",
+      "women",
+      "entrepreneurship"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "stand up india",
+      "sc st loan",
+      "women entrepreneur",
+      "business loan",
+      "startup loan"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "business-owner",
+      "woman"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "startup",
+      "women"
+    ]
+  },
+  {
+    "id": "pm-jan-dhan-yojana",
+    "name": "PM Jan Dhan Yojana",
+    "nameHindi": "प्रधानमंत्री जन धन योजना",
+    "ministry": "Ministry of Finance",
+    "category": "health",
+    "shortDesc": "Universal banking access with insurance benefits.",
+    "description": "PMJDY is a national financial inclusion mission providing universal banking access to every household. Benefits include a zero-balance savings account, ₹1 lakh accident insurance, ₹30,000 life insurance, and overdraft facility up to ₹10,000.",
+    "benefits": [
+      "Zero-balance savings account",
+      "₹1 lakh accident insurance cover",
+      "₹30,000 life insurance cover",
+      "Overdraft up to ₹10,000",
+      "RuPay debit card"
+    ],
+    "eligibility": [
+      "Any Indian citizen above 10 years",
+      "No existing bank account required",
+      "No minimum balance required"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Voter ID / Driving License",
+      "Passport size photo",
+      "Proof of address"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "₹1 Lakh Insurance",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmjdy.gov.in",
+    "tags": [
+      "health",
+      "banking",
+      "insurance",
+      "financial inclusion",
+      "savings"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "jan dhan",
+      "bank account",
+      "zero balance",
+      "insurance",
+      "rupay card"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": 10000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health"
+    ]
+  },
+  {
+    "id": "pm-poshan-shakti-nirman",
+    "name": "PM Poshan Shakti Nirman (POSHAN 2.0)",
+    "nameHindi": "प्रधानमंत्री पोषण शक्ति निर्माण",
+    "ministry": "Ministry of Women & Child Development",
+    "category": "students",
+    "shortDesc": "Nutrition support for pregnant women, children, and adolescent girls.",
+    "description": "POSHAN 2.0, also known as Saksham Anganwadi, provides nutritional support to pregnant women, lactating mothers, children (6 months to 6 years), and adolescent girls through Anganwadi centers across India.",
+    "benefits": [
+      "Supplementary nutrition at Anganwadi centers",
+      "Take-home rations for pregnant women",
+      "Health check-ups and growth monitoring",
+      "Nutrition and health education",
+      "Referral services"
+    ],
+    "eligibility": [
+      "Pregnant women and lactating mothers",
+      "Children aged 6 months to 6 years",
+      "Adolescent girls (11-18 years)",
+      "BPL families priority"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "MCP card",
+      "Anganwadi registration"
+    ],
+    "deadline": "Ongoing",
+    "amount": "Free Nutrition Support",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://wcd.nic.in",
+    "tags": [
+      "students",
+      "nutrition",
+      "health",
+      "children",
+      "women"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "poshan",
+      "nutrition",
+      "anganwadi",
+      "mid day meal",
+      "child nutrition"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student",
+      "woman"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "health",
+      "students",
+      "subsidy",
+      "women"
+    ]
+  },
+  {
+    "id": "pm-vishwakarma-scheme",
+    "name": "PM Vishwakarma Scheme",
+    "nameHindi": "पीएम विश्वकर्मा योजना",
+    "ministry": "Ministry of Micro, Small & Medium Enterprises",
+    "category": "business",
+    "shortDesc": "Skill training and loans for traditional artisans and craftspeople.",
+    "description": "PM Vishwakarma Scheme provides holistic support to traditional artisans and craftspeople including carpenters, blacksmiths, potters, tailors, and other Vishwakarma professionals. Benefits include skill training, toolkit incentives, and collateral-free credit support.",
+    "benefits": [
+      "Skill training certificate",
+      "Daily stipend during training",
+      "Toolkit incentive up to ₹15,000",
+      "Collateral-free loan up to ₹3 lakh",
+      "Digital transactions incentive"
+    ],
+    "eligibility": [
+      "Traditional artisan or craftsperson",
+      "Age 18+ years",
+      "Family not availing similar benefits",
+      "No income tax return filer"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Village/local body certificate",
+      "Bank account",
+      "Mobile number"
+    ],
+    "deadline": "Ongoing",
+    "amount": "Up to ₹3 Lakh Loan",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://pmvishwakarma.gov.in",
+    "tags": [
+      "business",
+      "skill",
+      "artisan",
+      "MSME",
+      "traditional crafts"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "vishwakarma",
+      "artisan",
+      "craftsman",
+      "traditional skills",
+      "carpenter tailor potter"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "business-owner"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "education",
+      "skill-development",
+      "students"
+    ]
+  },
+  {
+    "id": "kisan-credit-card",
+    "name": "Kisan Credit Card Scheme",
+    "nameHindi": "किसान क्रेडिट कार्ड योजना",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "category": "farmers",
+    "shortDesc": "Easy short-term loans for farmers at low interest rates.",
+    "description": "Kisan Credit Card (KCC) provides farmers with timely access to short-term credit for agricultural needs including crop production, post-harvest expenses, and household consumption. It offers flexible repayment options and low interest rates.",
+    "benefits": [
+      "Credit limit based on land holding",
+      "Low interest rate (4% on prompt repayment)",
+      "Coverage for crop production & maintenance",
+      "Post-harvest and consumption needs",
+      "Personal accident insurance cover"
+    ],
+    "eligibility": [
+      "All farmers — landholding or tenant",
+      "Joint farming families eligible",
+      "Minimum 18 years of age"
+    ],
+    "documents": [
+      "Aadhaar + PAN Card",
+      "Land documents",
+      "Crop plan",
+      "Passport size photos",
+      "Bank account"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "Based on Land Holding",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://pmkisan.gov.in",
+    "tags": [
+      "farmers",
+      "credit",
+      "loan",
+      "agriculture",
+      "KCC"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "kisan credit card",
+      "kcc",
+      "farmer loan",
+      "agriculture credit",
+      "crop loan"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "farmers"
+    ]
+  },
+  {
+    "id": "pm-kisan-maan-dhan-yojana",
+    "name": "PM Kisan Maan Dhan Yojana",
+    "nameHindi": "प्रधानमंत्री किसान मान धन योजना",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "category": "farmers",
+    "shortDesc": "₹3,000/month pension for small and marginal farmers.",
+    "description": "PM-KMY provides a minimum assured pension of ₹3,000 per month to small and marginal farmers after they reach 60 years of age. Farmers contribute between ₹55 to ₹200 per month based on their age at enrollment, with matching government contribution.",
+    "benefits": [
+      "₹3,000/month pension after age 60",
+      "Matching government contribution",
+      "Family pension at 50% after spouse's death",
+      "Life insurance cover of ₹3 lakh",
+      "Direct bank transfer"
+    ],
+    "eligibility": [
+      "Small and marginal farmer (up to 2 hectares)",
+      "Age 18-40 years at enrollment",
+      "Not a member of other pension schemes"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Land records",
+      "Bank account",
+      "Age proof",
+      "Mobile number"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "₹3,000/month Pension",
+    "isNew": false,
+    "isPopular": false,
+    "applicationUrl": "https://maandhan.in",
+    "tags": [
+      "farmers",
+      "pension",
+      "senior",
+      "retirement",
+      "social security"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "kisan pension",
+      "farmer pension",
+      "maan dhan",
+      "retirement farmer",
+      "old age farmer"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "senior-citizen"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "farmers",
+      "pension",
+      "senior"
+    ]
+  },
+  {
+    "id": "national-scholarship-portal",
+    "name": "National Scholarship Portal (NSP)",
+    "nameHindi": "राष्ट्रीय छात्रवृत्ति पोर्टल",
+    "ministry": "Ministry of Education",
+    "category": "students",
+    "shortDesc": "One-stop platform for all government scholarships.",
+    "description": "NSP is a one-stop platform for all government scholarship schemes for students across India including Pre-Matric, Post-Matric, Merit-cum-Means, and various central sector scholarships. Students can apply, track, and receive payments through this single portal.",
+    "benefits": [
+      "Single application for multiple schemes",
+      "Direct benefit transfer to bank",
+      "Scholarship amounts from ₹5,000 to ₹20,000/year",
+      "Track application status online",
+      "Renewal option for continuing students"
+    ],
+    "eligibility": [
+      "Students from Class 1 to PhD level",
+      "Income criteria varies by scheme",
+      "Minimum 50% marks (varies)",
+      "Indian citizen"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Income certificate",
+      "Caste certificate (if applicable)",
+      "Previous marksheet",
+      "Bank account linked to Aadhaar",
+      "Institute verification"
+    ],
+    "deadline": "September-October annually",
+    "amount": "₹5,000 - ₹20,000/year",
+    "isNew": false,
+    "isPopular": true,
+    "applicationUrl": "https://scholarships.gov.in",
+    "tags": [
+      "students",
+      "scholarship",
+      "education",
+      "NSP",
+      "financial aid"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "national scholarship",
+      "nsp",
+      "student scholarship",
+      "education aid",
+      "scholarship portal"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": 50,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "students",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "pm-employment-generation-programme",
+    "name": "PM Employment Generation Programme",
+    "nameHindi": "प्रधानमंत्री रोजगार सृजन कार्यक्रम",
+    "ministry": "Ministry of MSME",
+    "category": "jobs",
+    "shortDesc": "Subsidized loans for setting up micro-enterprises.",
+    "description": "PMEGP is a credit-linked subsidy scheme that helps unemployed youth and traditional artisans set up new micro-enterprises. The scheme provides subsidized loans with a margin money subsidy of 15-35% based on category and location.",
+    "benefits": [
+      "Margin money subsidy of 15-35%",
+      "Maximum project cost ₹50 lakh (manufacturing)",
+      "Maximum project cost ₹20 lakh (services)",
+      "Bank loans with relaxed collateral",
+      "Ongoing handholding support"
+    ],
+    "eligibility": [
+      "Unemployed youth aged 18+ years",
+      "Traditional artisans",
+      "Minimum 8th pass (above ₹10 lakh projects)",
+      "No IT exemption in previous years"
+    ],
+    "documents": [
+      "Aadhaar + PAN Card",
+      "Project report",
+      "Educational certificates",
+      "Residence proof",
+      "Caste certificate (if applicable)"
+    ],
+    "deadline": "Open Year Round",
+    "amount": "15-35% Subsidy",
+    "isNew": false,
+    "isPopular": false,
+    "applicationUrl": "https://pmegp.kviconline.gov.in",
+    "tags": [
+      "jobs",
+      "business",
+      "MSME",
+      "subsidy",
+      "entrepreneurship"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "employment generation",
+      "pmegp",
+      "micro enterprise",
+      "business subsidy",
+      "self employment"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "job-seeker",
+      "worker-labourer",
+      "business-owner"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "General",
+      "ST"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "jobs",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "rashtriya-swasthya-bima-yojana",
+    "name": "Rashtriya Swasthya Bima Yojana",
+    "nameHindi": "राष्ट्रीय स्वास्थ्य बीमा योजना",
+    "ministry": "Ministry of Health & Family Welfare",
+    "category": "health",
+    "shortDesc": "Health insurance for BPL families with smart card.",
+    "description": "RSBY provides health insurance coverage to BPL families with an annual cover of ₹30,000 per family. Beneficiaries are issued biometric smart cards for cashless treatment at empanelled hospitals. The premium is 90% subsidized by the government.",
+    "benefits": [
+      "₹30,000 health cover per family per year",
+      "Cashless treatment at empanelled hospitals",
+      "Smart card based access",
+      "Covers up to 5 family members",
+      "Pre-existing diseases covered from day one"
+    ],
+    "eligibility": [
+      "BPL families as per state list",
+      "Domestic workers, MGNREGA workers",
+      "Beedi workers, street vendors, mine workers"
+    ],
+    "documents": [
+      "BPL Ration Card",
+      "Aadhaar Card",
+      "Smart card registration at CSC",
+      "Address proof"
+    ],
+    "deadline": "Ongoing",
+    "amount": "₹30,000 Cover",
+    "isNew": false,
+    "isPopular": false,
+    "applicationUrl": "https://rsby.gov.in",
+    "tags": [
+      "health",
+      "insurance",
+      "BPL",
+      "smart card",
+      "hospitalization"
+    ],
+    "state": "Central",
+    "searchKeywords": [
+      "rashtriya swasthya",
+      "health insurance bpl",
+      "rsby",
+      "medical insurance",
+      "smart card health"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": 100000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health"
+    ]
+  },
+  {
+    "id": "atal-pension-yojana",
+    "name": "Atal Pension Yojana",
+    "nameHindi": "अटल पेंशन योजना",
+    "ministry": "Ministry of Finance (Department of Financial Services)",
+    "category": "senior-citizens",
+    "shortDesc": "Monthly pension of ₹1,000 to ₹5,000 from age 60",
+    "description": "Atal Pension Yojana (APY) is a government-backed pension scheme for unorganized sector workers. Subscribers receive a guaranteed minimum monthly pension of ₹1,000 to ₹5,000 depending on their contributions. The government co-contributes 50% of the contribution or ₹1,000 per year, whichever is lower, for subscribers who join before December 31, 2015 and are not income-tax payers. The scheme is administered by the Pension Fund Regulatory and Development Authority (PFRDA) and is open to all Indian citizens aged 18-40 years.",
+    "benefits": [
+      "Guaranteed monthly pension of ₹1,000/₹2,000/₹3,000/₹4,000/₹5,000 after 60 years of age",
+      "Government co-contribution of 50% of contribution or ₹1,000/year (whichever is lower) for eligible subscribers",
+      "Pension is guaranteed for lifetime of subscriber",
+      "After subscriber's death, spouse gets same pension",
+      "After both pass away, corpus returned to nominee",
+      "Tax benefits under Section 80CCD of Income Tax Act",
+      "Choice of pension amount (5 slabs) based on contribution period"
+    ],
+    "eligibility": [
+      "Must be an Indian citizen",
+      "Age between 18 and 40 years at time of joining",
+      "Must have a savings bank account",
+      "Aadhaar card mandatory",
+      "Mobile number linked to Aadhaar"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Savings Bank Account Passbook",
+      "Mobile Number linked to Aadhaar",
+      "Passport size photographs",
+      "Nominee details and photo"
+    ],
+    "deadline": "Open - No deadline (ongoing scheme)",
+    "amount": "₹1,000",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://npscra.nsdl.co.in/nsdl/APY/Index",
+    "tags": [
+      "pension",
+      "senior citizens",
+      "retirement",
+      "social security",
+      "unorganized sector",
+      "monthly income"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "atal pension yojana",
+      "apy",
+      "pension scheme",
+      "retirement pension",
+      "monthly pension",
+      "old age pension",
+      "unorganized worker pension"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "worker-labourer"
+    ],
+    "maxIncome": 500000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "pension",
+      "senior"
+    ]
+  },
+  {
+    "id": "pradhan-mantri-suraksha-bima-yojana",
+    "name": "Pradhan Mantri Suraksha Bima Yojana",
+    "nameHindi": "प्रधानमंत्री सुरक्षा बीमा योजना",
+    "ministry": "Ministry of Finance (Department of Financial Services)",
+    "category": "insurance",
+    "shortDesc": "Accident insurance cover of ₹2 lakh at just ₹20/year",
+    "description": "Pradhan Mantri Suraksha Bima Yojana (PMSBY) is a government-backed accident insurance scheme available to all bank account holders aged 18-70 years. It offers accidental death and disability cover of ₹2 lakh (₹1 lakh for partial disability) at a nominal premium of just ₹20 per annum. The premium is auto-debited from the subscriber's bank account annually. The scheme is administered through public sector general insurance companies and runs from June 1 to May 31 each year.",
+    "benefits": [
+      "Accidental death cover: ₹2,00,000",
+      "Permanent total disability cover: ₹2,00,000",
+      "Permanent partial disability cover: ₹1,00,000",
+      "Very low premium: just ₹20 per year",
+      "Auto-renewal from bank account",
+      "Coverage for all death and disability due to accident",
+      "Available to all bank account holders"
+    ],
+    "eligibility": [
+      "Indian citizen",
+      "Age between 18 and 70 years",
+      "Must have a savings bank account linked to Aadhaar",
+      "Must provide consent for auto-debit of premium"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Bank Account with Aadhaar linkage",
+      "Mobile Number"
+    ],
+    "deadline": "Open enrollment - covers June 1 to May 31 annually",
+    "amount": "₹2 lakh",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://financialservices.gov.in/insurance-divisions/Government-Sponsored-Socially-Oriented-Insurance-Schemes/PMSBY",
+    "tags": [
+      "insurance",
+      "accident cover",
+      "disability",
+      "social security",
+      "bank account",
+      "affordable"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "pmsby",
+      "suraksha bima yojana",
+      "accident insurance",
+      "personal accident",
+      "disability cover",
+      "₹20 insurance"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "worker-labourer",
+      "senior-citizen",
+      "job-seeker",
+      "disabled-person"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": true,
+    "categories": [
+      "disability",
+      "health"
+    ]
+  },
+  {
+    "id": "pradhan-mantri-jeevan-jyoti-bima-yojana",
+    "name": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+    "nameHindi": "प्रधानमंत्री जीवन ज्योति बीमा योजना",
+    "ministry": "Ministry of Finance (Department of Financial Services)",
+    "category": "insurance",
+    "shortDesc": "Life insurance cover of ₹2 lakh at just ₹436/year",
+    "description": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY) is a government-backed life insurance scheme offering a renewable one-year life cover of ₹2 lakh to all savings bank account holders aged 18-50 years at a premium of ₹436 per annum. The premium is auto-debited from the subscriber's account. In case of death of the insured (due to any cause), the nominee receives ₹2 lakh. The scheme is administered by LIC and other life insurers.",
+    "benefits": [
+      "Life cover of ₹2,00,000 for death due to any reason",
+      "Very low premium: ₹436 per year (less than ₹37/month)",
+      "Auto-renewal through bank auto-debit",
+      "No medical examination required",
+      "Cover continues as long as premium is paid",
+      "Available to all bank account holders aged 18-50",
+      "Can be linked to any savings account"
+    ],
+    "eligibility": [
+      "Indian citizen",
+      "Age between 18 and 50 years (cover up to 55 if enrolled before 50)",
+      "Must have a savings bank account",
+      "Must provide consent for auto-debit of premium"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Bank Account Passbook / Statement",
+      "Mobile Number",
+      "Nominee details"
+    ],
+    "deadline": "Open enrollment - cover period June 1 to May 31 annually",
+    "amount": "₹2 lakh",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://financialservices.gov.in/insurance-divisions/Government-Sponsored-Socially-Oriented-Insurance-Schemes/PMJJBY",
+    "tags": [
+      "life insurance",
+      "term cover",
+      "social security",
+      "family protection",
+      "bank account",
+      "affordable"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "pmjjby",
+      "jeevan jyoti bima",
+      "life insurance",
+      "term insurance",
+      "₹436 insurance",
+      "life cover scheme"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "worker-labourer",
+      "senior-citizen",
+      "job-seeker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health"
+    ]
+  },
+  {
+    "id": "deen-dayal-upadhyaya-grameen-kaushalya-yojana",
+    "name": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+    "nameHindi": "दीन दयाल उपाध्याय ग्रामीण कौशल्य योजना",
+    "ministry": "Ministry of Rural Development",
+    "category": "skill-development",
+    "shortDesc": "Free skill training and guaranteed placement for rural youth",
+    "description": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana (DDU-GKY) is a placement-linked skill training program for rural youth aged 15-35 years. It is the skilling arm of the National Rural Livelihoods Mission (NRLM). The scheme provides free residential skill training with a focus on employability and guarantees placement with a minimum salary. Trainees also receive post-placement support, career progression opportunities, and a monetary incentive upon completion. Special focus is given to women, SC/ST communities, and persons with disabilities.",
+    "benefits": [
+      "Free residential skill training in job-oriented trades",
+      "Guaranteed placement after training",
+      "Post-placement support for 6-12 months",
+      "Training allowance and stipend during training",
+      "Travel allowance (to and from training center)",
+      "Free food and accommodation during residential training",
+      "Monetary incentive upon successful completion",
+      "Career progression and upskilling opportunities"
+    ],
+    "eligibility": [
+      "Rural youth (age 15-35 years)",
+      "Family income less than ₹1.5 lakh per annum",
+      "Minimum educational qualification varies by trade (Class 5 to 12)",
+      "Priority to women, SC/ST, minorities, and persons with disabilities"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Residence Certificate / Domicile",
+      "Income Certificate (BPL or ≤₹1.5 lakh)",
+      "Caste Certificate (if applicable)",
+      "Educational Qualification Certificates",
+      "Bank Account Details",
+      "Passport size photographs"
+    ],
+    "deadline": "Open - ongoing scheme through empaneled training partners",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://ddugky.gov.in",
+    "tags": [
+      "skill training",
+      "rural youth",
+      "placement",
+      "employment",
+      "free training",
+      "residential",
+      "job guarantee"
+    ],
+    "state": "All India (rural areas)",
+    "searchKeywords": [
+      "ddugky",
+      "deen dayal",
+      "grameen kaushalya",
+      "rural skill training",
+      "free placement training",
+      "rural youth employment"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student",
+      "job-seeker",
+      "worker-labourer",
+      "disabled-person"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": true,
+    "categories": [
+      "education",
+      "jobs",
+      "skill-development",
+      "students"
+    ]
+  },
+  {
+    "id": "deen-dayal-antyodaya-yojana-national-rural-livelihoods-mission",
+    "name": "Deen Dayal Antyodaya Yojana - National Rural Livelihoods Mission",
+    "nameHindi": "दीन दयाल अंत्योदय योजना - राष्ट्रीय ग्रामीण आजीविका मिशन",
+    "ministry": "Ministry of Rural Development",
+    "category": "livelihood",
+    "shortDesc": "Self-employment and livelihood support for rural poor women",
+    "description": "DAY-NRLM (Ajeevika) is a flagship poverty alleviation program that organizes rural poor women into Self Help Groups (SHGs) and provides them with access to affordable credit, livelihood support, skill training, and market linkages. The mission aims to reduce poverty by enabling rural poor households to access gainful self-employment and skilled wage employment opportunities. It covers all districts of India with special focus on 250 identified backward districts. The program provides revolving funds, community investment funds, and interest subvention to SHGs.",
+    "benefits": [
+      "Organization into Self Help Groups (SHGs) for collective bargaining",
+      "Revolving Fund of ₹10,000-15,000 per SHG",
+      "Community Investment Fund (CIF) up to ₹50,000 per SHG",
+      "Interest subvention (7% or less) on bank loans to SHGs",
+      "Access to bank credit without collateral",
+      "Skill training for livelihood activities",
+      "Market linkages for SHG products",
+      "Vulnerability reduction fund for emergencies",
+      "Promotion of farm and non-farm livelihoods"
+    ],
+    "eligibility": [
+      "Rural poor households (identified through Participatory Identification of Poor)",
+      "Priority to women from SC/ST communities",
+      "Women-headed households and differently-abled persons",
+      "Landless laborers, marginal farmers, and artisans"
+    ],
+    "documents": [
+      "Aadhaar Card of all family members",
+      "BPL/Identification of Poor Household certificate",
+      "Caste Certificate (if applicable)",
+      "Bank Account details",
+      "Passport size photographs of all members"
+    ],
+    "deadline": "Open - ongoing mission till 2026-27 (extendable)",
+    "amount": "₹10,000-15,000",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://www.aajeevika.gov.in",
+    "tags": [
+      "self help groups",
+      "shg",
+      "rural livelihoods",
+      "women empowerment",
+      "poverty alleviation",
+      "microfinance",
+      "aajeevika"
+    ],
+    "state": "All India (all rural districts)",
+    "searchKeywords": [
+      "day nrlma",
+      "aajeevika",
+      "shg loan",
+      "self help group",
+      "rural livelihood mission",
+      "women self help group"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "woman",
+      "worker-labourer",
+      "disabled-person",
+      "job-seeker"
+    ],
+    "maxIncome": 100000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "jobs",
+      "subsidy",
+      "women"
+    ]
+  },
+  {
+    "id": "swachh-bharat-mission-phase-ii",
+    "name": "Swachh Bharat Mission (Phase II)",
+    "nameHindi": "स्वच्छ भारत मिशन (चरण II)",
+    "ministry": "Ministry of Housing and Urban Affairs",
+    "category": "sanitation",
+    "shortDesc": "O&M of community toilets, faecal sludge management, solid waste management",
+    "description": "Swachh Bharat Mission Phase II (Urban) focuses on sustaining the Open Defecation Free (ODF) status achieved in Phase I and extending solid waste management across all urban local bodies. It emphasizes faecal sludge and septage management, wastewater treatment, and source segregation of solid waste. The mission provides financial assistance for community and public toilet operations, waste processing facilities, and information, education, and communication (IEC) activities targeting behavioral change. It covers all statutory towns in India.",
+    "benefits": [
+      "Community and public toilet O&M support",
+      "Faecal sludge and septage management facilities",
+      "Solid waste processing plants (composting, recycling, WTE)",
+      "Door-to-door waste collection infrastructure",
+      "Plastic waste management units",
+      "Information, education, and communication activities",
+      "Training for sanitation workers",
+      "Support for decentralized wastewater treatment"
+    ],
+    "eligibility": [
+      "All urban local bodies (ULBs) across India",
+      "Residents of urban areas",
+      "Sanitation workers eligible for training and support"
+    ],
+    "documents": [
+      "ULB resolution for project implementation",
+      "Detailed Project Report (DPR)",
+      "Land ownership documents for facilities",
+      "Environmental clearance (if required)"
+    ],
+    "deadline": "Phase II: till 2025-26 (mission mode)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://swachhbharatmission.gov.in",
+    "tags": [
+      "sanitation",
+      "waste management",
+      "odf",
+      "cleanliness",
+      "toilets",
+      "recycling",
+      "urban development"
+    ],
+    "state": "All India (urban areas)",
+    "searchKeywords": [
+      "swachh bharat",
+      "swachhata",
+      "waste management",
+      "toilet scheme",
+      "sanitation scheme",
+      "odf plus"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "homemaker",
+      "worker-labourer",
+      "student"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health"
+    ]
+  },
+  {
+    "id": "national-health-mission",
+    "name": "National Health Mission",
+    "nameHindi": "राष्ट्रीय स्वास्थ्य मिशन",
+    "ministry": "Ministry of Health and Family Welfare",
+    "category": "health",
+    "shortDesc": "Strengthening public health systems, free maternal & child health services",
+    "description": "The National Health Mission (NHM) encompasses the National Rural Health Mission (NRHM) and the National Urban Health Mission (NUHM). It aims to provide accessible, affordable, and quality healthcare to rural and urban areas. NHM supports state health systems through funding for infrastructure, human resources, drugs, equipment, and health programs. Key focus areas include maternal and child health, communicable diseases (TB, Malaria, HIV), non-communicable diseases, and health system strengthening. The mission covers all states and union territories.",
+    "benefits": [
+      "Free maternal health services including Janani Suraksha Yojana",
+      "Free child health services and immunization",
+      "Free TB diagnosis and treatment (NIKSHAY platform)",
+      "Free malaria, dengue, and vector-borne disease treatment",
+      "Free HIV testing and antiretroviral therapy",
+      "Non-communicable disease screening at primary health centers",
+      "Free medicines and diagnostics at public health facilities",
+      "ASHA worker support for community health",
+      "Mobile health units and telemedicine"
+    ],
+    "eligibility": [
+      "All residents of India (rural and urban areas)",
+      "Priority to pregnant women, children under 5, and elderly",
+      "Below Poverty Line (BPL) families get additional support"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Residence Proof",
+      "BPL Card (if applicable)",
+      "MCP Card for pregnant women",
+      "Referral slip from sub-center (for specialist services)"
+    ],
+    "deadline": "Open - ongoing mission (yearly plans under National Health Mission)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://nhm.gov.in",
+    "tags": [
+      "healthcare",
+      "maternal health",
+      "child health",
+      "free medicines",
+      "immunization",
+      "tb control",
+      "public health"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "nhm",
+      "nrhm",
+      "national health mission",
+      "free health services",
+      "maternal health scheme",
+      "janani suraksha",
+      "asha worker"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health",
+      "women"
+    ]
+  },
+  {
+    "id": "anganwadi-services-integrated-child-development-services",
+    "name": "Anganwadi Services (Integrated Child Development Services)",
+    "nameHindi": "आंगनवाड़ी सेवाएं (एकीकृत बाल विकास सेवाएं)",
+    "ministry": "Ministry of Women and Child Development",
+    "category": "child-development",
+    "shortDesc": "Supplementary nutrition, immunization, and pre-school education for children 0-6 years",
+    "description": "ICDS (Anganwadi Services) is India's flagship early childhood development program providing a package of six services: supplementary nutrition, pre-school education, nutrition and health education, immunization, health check-ups, and referral services. It targets children aged 0-6 years, pregnant and lactating mothers, and adolescent girls (11-18 years). Services are delivered through community-based Anganwadi centers. Over 13 lakh Anganwadi centers operate nationwide making it the largest community-based program of its kind globally.",
+    "benefits": [
+      "Supplementary nutrition (take-home ration or hot cooked meals)",
+      "Free immunization (as per national immunization schedule)",
+      "Pre-school non-formal education for 3-6 year olds",
+      "Health check-ups including growth monitoring",
+      "Referral services to primary health centers",
+      "Nutrition and health education for mothers",
+      "Take-home rations for pregnant and lactating women",
+      "Iron and folic acid supplementation"
+    ],
+    "eligibility": [
+      "Children aged 0-6 years",
+      "Pregnant women and lactating mothers (up to 6 months after delivery)",
+      "Adolescent girls aged 11-18 years (in select areas)",
+      "Priority to SC/ST communities and chronically undernourished children"
+    ],
+    "documents": [
+      "Aadhaar Card of child and mother",
+      "Birth Certificate of child",
+      "MCP Card (Mother and Child Protection Card)",
+      "BPL Certificate (if applicable)",
+      "Residence Proof"
+    ],
+    "deadline": "Open - ongoing scheme",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://icds-wcd.nic.in",
+    "tags": [
+      "child nutrition",
+      "anganwadi",
+      "preschool",
+      "immunization",
+      "maternal nutrition",
+      "early childhood",
+      "icds"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "icds",
+      "anganwadi",
+      "child development",
+      "supplementary nutrition",
+      "take home ration",
+      "preschool",
+      "balwadi"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "woman",
+      "homemaker",
+      "student"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "housing",
+      "students",
+      "women"
+    ]
+  },
+  {
+    "id": "pm-poshan-formerly-mid-day-meal-scheme",
+    "name": "PM POSHAN (formerly Mid-Day Meal Scheme)",
+    "nameHindi": "पीएम पोषण (पूर्व में मध्याह्न भोजन योजना)",
+    "ministry": "Ministry of Education (Department of School Education and Literacy)",
+    "category": "education",
+    "shortDesc": "Free hot cooked meal every school day for government school children",
+    "description": "PM POSHAN (formerly known as the Mid-Day Meal Scheme) is India's largest school feeding program providing one free hot cooked meal every school day to children in Classes 1-8 in government and government-aided schools. The scheme aims to improve nutritional status, enhance school enrollment and attendance, and promote socialization among children. A meal provides a minimum of 450-700 calories and 12-20 grams of protein per serving. The scheme covers over 11 crore children across 11 lakh schools nationwide.",
+    "benefits": [
+      "Free hot cooked nutritious meal every school day",
+      "Minimum 450 calories + 12g protein for primary classes",
+      "Minimum 700 calories + 20g protein for upper primary classes",
+      "Improved school enrollment and reduced dropout rates",
+      "Socialization and community bonding through shared meals",
+      "Nutritional support reduces classroom hunger",
+      "Eggs/milk/banana provided in many states (varies by state policy)",
+      "Taste testing by parents and community participation"
+    ],
+    "eligibility": [
+      "Children enrolled in Classes 1-8 in government schools",
+      "Children enrolled in government-aided schools",
+      "Children enrolled in National Child Labour Project schools",
+      "Children enrolled in Madarsas and Maqtabs supported by Sarva Shiksha Abhiyan"
+    ],
+    "documents": [
+      "School enrollment proof",
+      "Aadhaar Card of child",
+      "Birth Certificate for age verification"
+    ],
+    "deadline": "Open - ongoing scheme (school year basis)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://pmposhan.education.gov.in",
+    "tags": [
+      "mid day meal",
+      "school nutrition",
+      "children",
+      "education",
+      "hot cooked meal",
+      "school enrollment",
+      "pm poshan"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "pm poshan",
+      "mid day meal",
+      "school meal",
+      "free lunch",
+      "children nutrition",
+      "midday meal scheme"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student",
+      "job-seeker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "students"
+    ]
+  },
+  {
+    "id": "samagra-shiksha-abhiyan",
+    "name": "Samagra Shiksha Abhiyan",
+    "nameHindi": "समग्र शिक्षा अभियान",
+    "ministry": "Ministry of Education (Department of School Education and Literacy)",
+    "category": "education",
+    "shortDesc": "Holistic school education from pre-primary to Class 12",
+    "description": "Samagra Shiksha Abhiyan is an integrated school education scheme covering pre-primary to Class 12. It subsumes three erstwhile schemes: Sarva Shiksha Abhiyan (SSA), Rashtriya Madhyamik Shiksha Abhiyan (RMSA), and Teacher Education (TE). The scheme treats school education as a continuum from pre-school to senior secondary and aims to improve school effectiveness measured in terms of equal opportunities, learning outcomes, and quality. It provides infrastructure support, teacher training, digital learning resources, and gender-inclusive facilities.",
+    "benefits": [
+      "Free and compulsory education for 6-14 years (RTE)",
+      "Infrastructure grants for school buildings, toilets, and libraries",
+      "Free textbooks and uniforms for children from disadvantaged groups",
+      "ICT and digital classroom facilities",
+      "Vocational education at secondary and senior secondary levels",
+      "Sports and physical education equipment",
+      "Transport allowance for girls and children with special needs",
+      "Teacher training and professional development",
+      "Kasturba Gandhi Balika Vidyalayas for girls' education"
+    ],
+    "eligibility": [
+      "All children aged 6-14 years for elementary education (RTE mandate)",
+      "Children from economically weaker sections and disadvantaged groups",
+      "Girls, SC/ST, OBC, minority communities, and children with special needs"
+    ],
+    "documents": [
+      "Aadhaar Card of child and parent",
+      "Birth Certificate",
+      "BPL Certificate (if applying for specific benefits)",
+      "Caste Certificate (if applying for SC/ST/OBC benefits)",
+      "Income Certificate (for fee reimbursement)"
+    ],
+    "deadline": "Open - ongoing scheme (2021-22 to 2025-26)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://samagra.education.gov.in",
+    "tags": [
+      "school education",
+      "rte",
+      "free education",
+      "girls education",
+      "teacher training",
+      "vocational training",
+      "digital classrooms"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "samagra shiksha",
+      "ssa",
+      "sarva shiksha",
+      "rte act",
+      "school education scheme",
+      "free education scheme"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student",
+      "job-seeker",
+      "woman",
+      "senior-citizen"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "skill-development",
+      "students",
+      "women"
+    ]
+  },
+  {
+    "id": "pradhan-mantri-bhartiya-janaushadhi-pariyojana",
+    "name": "Pradhan Mantri Bhartiya Janaushadhi Pariyojana",
+    "nameHindi": "प्रधानमंत्री भारतीय जनऔषधि परियोजना",
+    "ministry": "Ministry of Chemicals and Fertilizers (Department of Pharmaceuticals)",
+    "category": "health",
+    "shortDesc": "High-quality generic medicines at 50-90% lower prices",
+    "description": "Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP) provides high-quality generic medicines at affordable prices through dedicated Janaushadhi Kendras across India. Medicines are priced 50-90% lower than branded alternatives. The scheme covers over 1,900 medicines and 285 surgical items including cardiovascular, diabetes, antibiotics, antipyretics, and oncology drugs. All medicines are tested at NABL-accredited labs to ensure quality. The scheme is implemented by the Bureau of Pharma PSUs of India (BPPI) under the Department of Pharmaceuticals.",
+    "benefits": [
+      "Generic medicines at 50-90% lower prices than branded drugs",
+      "Over 1,900 medicines and 285 surgical items available",
+      "NABL-accredited lab testing ensures quality",
+      "Free medical check-up at select Janaushadhi Kendras",
+      "Monthly savings of ₹2,000-5,000 for families on regular medication",
+      "Wide network of 10,000+ Janaushadhi Kendras",
+      "Medicines for chronic diseases (diabetes, BP, heart, cancer, etc.)",
+      "Easy availability of over-the-counter medicines"
+    ],
+    "eligibility": [
+      "Open to all Indian citizens",
+      "No income or eligibility criteria",
+      "Anyone can purchase medicines from any Janaushadhi Kendra"
+    ],
+    "documents": [
+      "Doctor's prescription (for prescription medicines)",
+      "No other documents required for purchase"
+    ],
+    "deadline": "Open - ongoing scheme",
+    "amount": "₹2,000-5,000",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://janaushadhi.gov.in",
+    "tags": [
+      "generic medicines",
+      "affordable healthcare",
+      "janaushadhi",
+      "low cost medicines",
+      "quality drugs",
+      "pharmacy"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "janaushadhi",
+      "generic medicine",
+      "pmbjp",
+      "affordable medicines",
+      "jan aushadhi kendra",
+      "generic drug store"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health"
+    ]
+  },
+  {
+    "id": "saubhagya-yojana-pradhan-mantri-sahaj-bijli-har-ghar-yojana",
+    "name": "Saubhagya Yojana (Pradhan Mantri Sahaj Bijli Har Ghar Yojana)",
+    "nameHindi": "सौभाग्य योजना (प्रधानमंत्री सहज बिजली हर घर योजना)",
+    "ministry": "Ministry of Power",
+    "category": "infrastructure",
+    "shortDesc": "Free electricity connection to all unelectrified households",
+    "description": "Saubhagya Yojana aims to provide last-mile electricity connections to all remaining unelectrified households in rural and urban areas. The scheme provides free electricity connections to Below Poverty Line (BPL) households and connections at a nominal cost of ₹500 (payable in 10 installments) to non-BPL households. The connection includes a metered connection, LED bulbs, and a power bank. Over 2.5 crore households have been electrified under this scheme making it one of the most successful electrification drives globally.",
+    "benefits": [
+      "Free electricity connection for BPL households",
+      "Nominal ₹500 connection (payable in 10 installments) for non-BPL",
+      "LED bulbs (3-5) provided free of cost",
+      "Power bank for DUE (Declared Un-electrified) households",
+      "Metered connection including service line and meter",
+      "No monthly minimum charges for BPL households (state-specific)",
+      "24x7 electricity supply under Saubhagya + DDUGJY integration"
+    ],
+    "eligibility": [
+      "Unelectrified households (no existing electricity connection)",
+      "BPL households get completely free connection",
+      "Non-BPL households pay ₹500 (installments of ₹50/month)",
+      "Covered both rural and urban areas"
+    ],
+    "documents": [
+      "Aadhaar Card of household head",
+      "BPL Certificate (for free connection)",
+      "Proof of residence (address proof)",
+      "Passport size photograph of head of household",
+      "Application form (available at local electricity office)"
+    ],
+    "deadline": "Scheme largely complete; new connections under regular rural electrification programs",
+    "amount": "₹500",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://saubhagya.gov.in",
+    "tags": [
+      "electricity",
+      "rural electrification",
+      "free connection",
+      "saubhagya",
+      "power",
+      "led bulbs",
+      "household electrification"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "saubhagya yojana",
+      "free electricity connection",
+      "bijli connection",
+      "household electrification",
+      "power scheme"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "worker-labourer",
+      "senior-citizen"
+    ],
+    "maxIncome": 100000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "housing",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "jal-jeevan-mission",
+    "name": "Jal Jeevan Mission",
+    "nameHindi": "जल जीवन मिशन",
+    "ministry": "Ministry of Jal Shakti (Department of Drinking Water and Sanitation)",
+    "category": "infrastructure",
+    "shortDesc": "Individual household tap water connection in every rural home",
+    "description": "Jal Jeevan Mission (JJM) aims to provide Functional Household Tap Connection (FHTC) to every rural household in India by 2024-25. The mission focuses on ensuring water quality, sustainability, and community participation. Each connection provides at least 55 liters per capita per day (lpcd) of potable water. The mission also emphasizes greywater treatment, source sustainability, and monitoring of water quality through field test kits and laboratory testing. Villages are declared 'Har Ghar Jal' when every household gets a tap connection.",
+    "benefits": [
+      "Individual household tap connection (FHTC) to every rural home",
+      "Minimum 55 liters per capita per day potable water",
+      "Water quality testing through Field Test Kits (FTK) and labs",
+      "Greywater treatment and management infrastructure",
+      "Community involvement through Village Water & Sanitation Committees",
+      "Solar-powered water supply systems for remote areas",
+      "Trainings for local pump operators and community members",
+      "Information, Education and Communication (IEC) activities"
+    ],
+    "eligibility": [
+      "All rural households in India",
+      "Priority to villages in water-stressed areas (desert, dryland)",
+      "SC/ST dominated villages, Aspirational Districts, and quality-affected areas"
+    ],
+    "documents": [
+      "Aadhaar Card of household head",
+      "Residence Proof (village panchayat certificate)",
+      "BPL certificate (where applicable)",
+      "Joint photograph of family members",
+      "Application at village panchayat or PHE department"
+    ],
+    "deadline": "By 2024-25 (all rural households)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://jaljeevanmission.gov.in",
+    "tags": [
+      "drinking water",
+      "tap connection",
+      "rural development",
+      "water quality",
+      "har ghar jal",
+      "pipe water"
+    ],
+    "state": "All India (rural areas)",
+    "searchKeywords": [
+      "jal jeevan mission",
+      "tap water",
+      "drinking water scheme",
+      "har ghar jal",
+      "fhtc",
+      "piped water supply"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "worker-labourer",
+      "senior-citizen"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "housing",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "national-ayush-mission",
+    "name": "National Ayush Mission",
+    "nameHindi": "राष्ट्रीय आयुष मिशन",
+    "ministry": "Ministry of Ayush",
+    "category": "health",
+    "shortDesc": "Promotion and development of AYUSH systems of medicine",
+    "description": "National Ayush Mission (NAM) promotes the development of Ayurveda, Yoga & Naturopathy, Unani, Siddha, Sowa Rigpa, and Homoeopathy (AYUSH) systems. It provides financial assistance to states for setting up AYUSH healthcare facilities, drug quality control labs, cultivation of medicinal plants, and awareness programs. The mission aims to strengthen AYUSH infrastructure, improve availability of quality AYUSH drugs, and integrate AYUSH with the national healthcare delivery system through co-location in primary health centers and district hospitals.",
+    "benefits": [
+      "AYUSH health facilities (dispensaries, hospitals, clinics)",
+      "Co-location of AYUSH facilities at PHCs, CHCs, and district hospitals",
+      "Quality control and standardization of AYUSH drugs",
+      "Medicinal plant cultivation and conservation support",
+      "Research and development in AYUSH systems",
+      "Awareness campaigns on traditional medicine",
+      "Ayushman Arogya Mandir (AYUSH Health and Wellness Centers)",
+      "Educational scholarships and training programs"
+    ],
+    "eligibility": [
+      "State Governments through DPR-based proposals",
+      "AYUSH practitioners and institutions",
+      "Farmers and entrepreneurs for medicinal plant cultivation (up to 60% subsidy)",
+      "Common citizens seeking AYUSH treatment at subsidized rates"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Prescription from AYUSH practitioner (for treatment)",
+      "Land documents (for medicinal plant cultivation)",
+      "Project proposal (for institutional grants)"
+    ],
+    "deadline": "Open - ongoing scheme till 2025-26",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://namayush.gov.in",
+    "tags": [
+      "ayurveda",
+      "yoga",
+      "homeopathy",
+      "traditional medicine",
+      "unani",
+      "siddha",
+      "medicinal plants",
+      "ayush"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "ayush mission",
+      "ayurveda scheme",
+      "yoga promotion",
+      "medicinal plants subsidy",
+      "nam",
+      "traditional medicine"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health",
+      "housing",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "pradhan-mantri-kisan-sampada-yojana",
+    "name": "Pradhan Mantri Kisan Sampada Yojana",
+    "nameHindi": "प्रधानमंत्री किसान संपदा योजना",
+    "ministry": "Ministry of Food Processing Industries",
+    "category": "food-processing",
+    "shortDesc": "Capital subsidy for food processing infrastructure and units",
+    "description": "Pradhan Mantri Kisan Sampada Yojana (PMKSY) is a central sector scheme for creating modern infrastructure for food processing. It provides financial assistance (capital subsidy) for setting up mega food parks, cold chain projects, food processing units, and quality testing labs. The scheme aims to reduce post-harvest losses, enhance processing levels, create employment, and increase the income of farmers through better market linkages. Components include Mega Food Parks (subsidy up to ₹50 crore), Integrated Cold Chain (subsidy up to ₹10 crore), and Unit/Infrastructure schemes (subsidy up to 35-50%).",
+    "benefits": [
+      "Mega Food Park: capital subsidy up to ₹50 crore (50% of project cost)",
+      "Integrated Cold Chain: subsidy up to ₹10 crore (50-35%)",
+      "Food Processing Unit: subsidy up to ₹5 crore (35-50% depending on category)",
+      "Quality testing lab: subsidy up to 75% of project cost",
+      "Backward and forward linkages for processed food",
+      "Creation of common infrastructure for food processing",
+      "Employment generation (estimated 5 lakh+ direct jobs)",
+      "Reduction of post-harvest wastage (currently ~16%)"
+    ],
+    "eligibility": [
+      "Registered companies, cooperatives, FPOs, proprietorship firms",
+      "Minimum net worth requirements vary by component",
+      "Project must be commercially viable with technical feasibility",
+      "Land ownership or long-term lease (≥30 years) required"
+    ],
+    "documents": [
+      "Detailed Project Report (DPR) with techno-economic feasibility",
+      "Certificate of Incorporation / Registration",
+      "Land documents (ownership or lease deed)",
+      "Project cost estimates with quotations",
+      "Financial statements (audited for last 3 years)",
+      "Environmental clearance (if required)",
+      "NOC from State Pollution Control Board"
+    ],
+    "deadline": "Open - scheme till 2025-26 (applications reviewed periodically)",
+    "amount": "₹50 crore",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://pmksy.gov.in",
+    "tags": [
+      "food processing",
+      "cold chain",
+      "mega food park",
+      "agri infrastructure",
+      "post harvest",
+      "subsidy",
+      "kisan"
+    ],
+    "state": "All India",
+    "searchKeywords": [
+      "pmksy",
+      "kisan sampada",
+      "food processing subsidy",
+      "mega food park",
+      "cold chain subsidy",
+      "agro processing"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "business-owner",
+      "job-seeker"
+    ],
+    "maxIncome": 50,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "business",
+      "farmers",
+      "subsidy"
+    ]
+  },
+  {
+    "id": "smart-cities-mission",
+    "name": "Smart Cities Mission",
+    "nameHindi": "स्मार्ट सिटीज़ मिशन",
+    "ministry": "Ministry of Housing and Urban Affairs",
+    "category": "urban-development",
+    "shortDesc": "Citizen-centric urban development with smart infrastructure",
+    "description": "Smart Cities Mission is a flagship urban renewal program covering 100 selected cities. It aims to promote sustainable and inclusive cities that provide core infrastructure, clean environment, and a decent quality of life to citizens through smart solutions. The mission operates through Special Purpose Vehicles (SPVs) that implement Area-Based Development (ABD) and Pan-City smart solutions. Core infrastructure includes 24x7 water supply, assured electricity, sanitation, intelligent traffic management, e-governance, and safety systems.",
+    "benefits": [
+      "24x7 water supply with smart metering",
+      "Assured electricity supply with smart grid",
+      "Intelligent traffic management systems",
+      "Integrated command and control centers",
+      "Smart street lighting and public Wi-Fi",
+      "E-governance and citizen service portals",
+      "Safe city solutions (CCTV surveillance, emergency response)",
+      "Green buildings and energy-efficient infrastructure",
+      "Mixed land use and walkable neighborhoods",
+      "Transit-oriented development (TOD)"
+    ],
+    "eligibility": [
+      "Residents of 100 selected smart cities",
+      "Citizens can participate through area-level committees",
+      "Urban local bodies implementing projects"
+    ],
+    "documents": [
+      "Residence proof for citizen services",
+      "Property documents for smart building approvals",
+      "Aadhaar for citizen ID-based services"
+    ],
+    "deadline": "Mission period: 2015-2025 (project completion timelines vary by city)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://smartcities.gov.in",
+    "tags": [
+      "smart city",
+      "urban development",
+      "digital infrastructure",
+      "e-governance",
+      "intelligent transport",
+      "clean energy",
+      "smart solutions"
+    ],
+    "state": "100 cities across India",
+    "searchKeywords": [
+      "smart cities mission",
+      "smart city",
+      "urban development scheme",
+      "city modernization",
+      "smart infrastructure"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "business-owner",
+      "job-seeker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "housing"
+    ]
+  },
+  {
+    "id": "pradhan-mantri-gramin-digital-saksharta-abhiyan",
+    "name": "Pradhan Mantri Gramin Digital Saksharta Abhiyan",
+    "nameHindi": "प्रधानमंत्री ग्रामीण डिजिटल साक्षरता अभियान",
+    "ministry": "Ministry of Electronics and Information Technology",
+    "category": "digital-literacy",
+    "shortDesc": "Free digital literacy training for rural households",
+    "description": "Pradhan Mantri Gramin Digital Saksharta Abhiyan (PMGDISHA) aims to make 6 crore rural households digitally literate by providing free basic digital literacy training. The training covers operating computers/digital devices, accessing the internet, using digital payment systems, filling online forms, and using government e-services. Training is provided through registered training partners and Common Service Centers (CSCs). Each beneficiary receives a certificate upon passing a competency test. Special focus on women, SC/ST, and economically weaker sections.",
+    "benefits": [
+      "Free digital literacy training program",
+      "Training on computer and mobile device operation",
+      "Internet browsing and email usage",
+      "Digital payment systems (UPI, net banking, mobile wallets)",
+      "Filling online government application forms",
+      "Accessing e-governance services",
+      "Certificate upon successful completion",
+      "Training allowance/incentive in some cases"
+    ],
+    "eligibility": [
+      "Rural household members (one per household)",
+      "Age 14-60 years",
+      "Must not be digitally literate (no prior formal computer training)",
+      "Priority to women, SC/ST, BPL families, and persons with disabilities"
+    ],
+    "documents": [
+      "Aadhaar Card",
+      "Residence proof (rural area domicile)",
+      "BPL Certificate (if applicable)",
+      "Caste Certificate (if applicable)",
+      "Passport size photograph"
+    ],
+    "deadline": "Open - till target of 6 crore households is achieved",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://www.pmgdisha.in",
+    "tags": [
+      "digital literacy",
+      "computer training",
+      "rural empowerment",
+      "internet",
+      "digital payments",
+      "e-governance",
+      "pmgdisha"
+    ],
+    "state": "All India (rural areas)",
+    "searchKeywords": [
+      "pmgdisha",
+      "digital saksharta",
+      "computer training free",
+      "digital literacy scheme",
+      "internet training rural"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student",
+      "job-seeker",
+      "senior-citizen",
+      "homemaker"
+    ],
+    "maxIncome": 250000,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "EWS",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "housing",
+      "skill-development"
+    ]
+  },
+  {
+    "id": "mission-indradhanush",
+    "name": "Mission Indradhanush",
+    "nameHindi": "मिशन इंद्रधनुष",
+    "ministry": "Ministry of Health and Family Welfare",
+    "category": "health",
+    "shortDesc": "Free full immunization for children and pregnant women who missed doses",
+    "description": "Mission Indradhanush (MI) is a special drive to immunize all children under 2 years and pregnant women who are partially vaccinated or unvaccinated. It targets 12 vaccine-preventable diseases including diphtheria, tetanus, pertussis, polio, measles, rubella, TB, hepatitis B, meningitis, pneumonia, rotavirus, and Japanese encephalitis. The mission operates in intensive phases covering high-priority districts with low immunization coverage. It uses a catch-up approach through special immunization sessions, mobile teams, and community mobilization by ASHA workers.",
+    "benefits": [
+      "Free immunization against 12 vaccine-preventable diseases",
+      "Special catch-up sessions for children who missed routine vaccines",
+      "Immunization for pregnant women (TT vaccine)",
+      "Mobile vaccination teams for hard-to-reach areas",
+      "Community mobilization through ASHA and Anganwadi workers",
+      "Vaccine safety monitoring and adverse event management",
+      "Complete immunization card and tracking"
+    ],
+    "eligibility": [
+      "Children aged 0-2 years who missed or partially received routine immunization",
+      "Pregnant women who missed tetanus toxoid vaccination",
+      "Priority to high-burden districts with low immunization coverage"
+    ],
+    "documents": [
+      "Child's immunization card (MCP card)",
+      "Aadhaar Card of parent/guardian (for tracking)",
+      "Pregnancy registration card (for pregnant women)"
+    ],
+    "deadline": "Ongoing in phases (Intensified Mission Indradhanush 5.0 completed; new phases announced)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://main.mohfw.gov.in/‌major-programmes/universal-immunization-programme/mission-indradhanush",
+    "tags": [
+      "immunization",
+      "vaccination",
+      "children health",
+      "polio",
+      "measles",
+      "tetanus",
+      "india child health",
+      "vaccine"
+    ],
+    "state": "All India (high-priority districts)",
+    "searchKeywords": [
+      "mission indradhanush",
+      "immunization drive",
+      "free vaccination",
+      "children vaccine",
+      "pregnancy vaccination",
+      "imi"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "senior-citizen",
+      "disabled-person",
+      "woman",
+      "worker-labourer",
+      "student",
+      "homemaker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "female",
+      "woman"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "health",
+      "women"
+    ]
+  },
+  {
+    "id": "pradhan-mantri-gram-sadak-yojana",
+    "name": "Pradhan Mantri Gram Sadak Yojana",
+    "nameHindi": "प्रधानमंत्री ग्राम सड़क योजना",
+    "ministry": "Ministry of Rural Development",
+    "category": "infrastructure",
+    "shortDesc": "All-weather road connectivity to unconnected rural habitations",
+    "description": "Pradhan Mantri Gram Sadak Yojana (PMGSY) provides all-weather road connectivity to eligible unconnected rural habitations in rural India. PMGSY Phase I (2000-2025) connects habitations with population >500 in plain areas and >250 in hilly/desert/tribal areas. PMGSY Phase III focuses on consolidation of rural roads including upgrading routes to State Highway standards and connecting habitations to market centers, schools, and hospitals. The scheme has constructed over 7 lakh km of rural roads benefiting millions of rural households.",
+    "benefits": [
+      "All-weather road connectivity to rural habitations",
+      "Improved access to markets, education, and healthcare",
+      "Reduced travel time and transportation costs",
+      "Year-round connectivity even during monsoon",
+      "Employment generation in rural areas",
+      "Better access to emergency services",
+      "Increased property value in connected villages",
+      "Social integration of remote communities"
+    ],
+    "eligibility": [
+      "Unconnected rural habitations meeting population criteria",
+      "Plain areas: population >500 (and >250 for tribal/hilly/desert areas)",
+      "Under PMGSY-III: habitations with population >200 in plain areas"
+    ],
+    "documents": [
+      "Habitation survey report and GIS mapping data",
+      "Detailed Project Report (DPR) with engineering design",
+      "Land availability certificate from state government",
+      "Forest and environmental clearances (if needed)",
+      "Utility shifting plan (existing utilities on proposed road)"
+    ],
+    "deadline": "Open - Phase III till 2024-25 (extended in Union Budget)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://pmgsy.gov.in",
+    "tags": [
+      "rural roads",
+      "infrastructure",
+      "connectivity",
+      "village road",
+      "pmgsy",
+      "all weather road",
+      "rural development"
+    ],
+    "state": "All India (rural areas)",
+    "searchKeywords": [
+      "pmgsy",
+      "gram sadak",
+      "rural road",
+      "village connectivity",
+      "all weather road",
+      "sadak yojana"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "farmer",
+      "worker-labourer",
+      "senior-citizen"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "subsidy"
+    ]
+  },
+  {
+    "id": "rashtriya-uchchatar-shiksha-abhiyan",
+    "name": "Rashtriya Uchchatar Shiksha Abhiyan",
+    "nameHindi": "राष्ट्रीय उच्चतर शिक्षा अभियान",
+    "ministry": "Ministry of Education (Department of Higher Education)",
+    "category": "education",
+    "shortDesc": "Financial assistance to state universities and colleges for infrastructure and quality",
+    "description": "Rashtriya Uchchatar Shiksha Abhiyan (RUSA) is a centrally sponsored scheme that provides strategic funding to state higher educational institutions. It aims to improve the quality, accessibility, and equity of higher education in India by funding infrastructure development, faculty recruitment, research, and quality improvement initiatives. RUSA supports state universities, affiliated colleges, professional colleges, and polytechnics. Components include new model colleges, upgradation of existing institutions, research and innovation grants, and equity initiatives for improving access for marginalized communities.",
+    "benefits": [
+      "Infrastructure development grants for universities and colleges",
+      "Faculty recruitment support and training",
+      "Research and innovation grants",
+      "New model colleges and professional colleges",
+      "Upgradation of autonomous colleges to universities",
+      "E-learning and digital infrastructure support",
+      "Scholarships and equity support for SC/ST/OBC/minorities",
+      "Accreditation support for NAAC grading improvement"
+    ],
+    "eligibility": [
+      "State public universities and affiliated colleges",
+      "Institutions must have valid UGC recognition",
+      "Accredited by NAAC (minimum 'C' grade for funding)",
+      "State government must provide matching share (at least 60%)"
+    ],
+    "documents": [
+      "Institutional Development Plan (IDP)",
+      "NAAC accreditation certificate and score card",
+      "UGC recognition documents",
+      "State government concurrence letter",
+      "Audited financial statements (last 3 years)",
+      "Detailed Project Report for infrastructure components"
+    ],
+    "deadline": "Open - RUSA 2.0 till 2024-25 (RUSA 3.0 under formulation)",
+    "isNew": true,
+    "isPopular": false,
+    "applicationUrl": "https://rusa.gov.in",
+    "tags": [
+      "higher education",
+      "college funding",
+      "university grants",
+      "infrastructure",
+      "rashtriya uchchatar",
+      "state universities"
+    ],
+    "state": "All India (state higher education institutions)",
+    "searchKeywords": [
+      "rusa",
+      "rashtriya uchchatar shiksha",
+      "higher education grant",
+      "college infrastructure",
+      "university funding scheme"
+    ],
+    "eligibleStates": [
+      "All India"
+    ],
+    "eligibleOccupations": [
+      "student",
+      "job-seeker"
+    ],
+    "maxIncome": null,
+    "minIncome": null,
+    "eligibleCategories": [
+      "SC",
+      "ST",
+      "General"
+    ],
+    "minimumMarks": null,
+    "genderEligibility": [
+      "all"
+    ],
+    "disabilityEligible": false,
+    "categories": [
+      "education",
+      "students",
+      "subsidy"
+    ]
+  }
+]
