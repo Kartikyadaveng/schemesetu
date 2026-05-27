@@ -329,6 +329,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const toggleTheme = () => setIsDark(prev => !prev);
 
+  // ── Scheme Methods (hoisted early to avoid TDZ in callbacks) ────────────
+
+  const ALL_SCHEMES = (Array.isArray(allSchemesData) ? allSchemesData : DUMMY_SCHEMES) as Scheme[];
+  const getSchemeById = (id: string) => ALL_SCHEMES.find(s => s.id === id);
+
+  const isSaved = useCallback((schemeId: string) => {
+    return savedSchemes.includes(schemeId);
+  }, [savedSchemes]);
+
   // ── Auth Methods (Firebase when ready, simulated fallback) ──────────────
 
   const login = async (email: string, password: string) => {
@@ -608,11 +617,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         }
       }
     }
-  }, [savedSchemes, user, getSchemeById, ALL_SCHEMES]);
-
-  const isSaved = useCallback((schemeId: string) => {
-    return savedSchemes.includes(schemeId);
-  }, [savedSchemes]);
+  }, [savedSchemes, user]);
 
   // ── Notification Methods ────────────────────────────────────────────────
 
@@ -653,12 +658,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem(GUEST_NOTIF_KEY);
     }
   }, [user]);
-
-  // ── Scheme Methods ──────────────────────────────────────────────────────
-
-  const ALL_SCHEMES = (Array.isArray(allSchemesData) ? allSchemesData : DUMMY_SCHEMES) as Scheme[];
-
-  const getSchemeById = (id: string) => ALL_SCHEMES.find(s => s.id === id);
 
   return (
     <AppContext.Provider
