@@ -5,6 +5,7 @@ import { type Lang } from '../constants/strings';
 import { initFirebase, isFirebaseReady, getAuthInstance, onAuthChange, handleRedirectResult } from '../services/firebase';
 import * as firestore from '../services/firestoreService';
 import type { Occupation } from '../types/profile';
+import type { NotificationData } from '../services/firestoreService';
 import { isMobileDevice } from '../utils/device';
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -42,6 +43,8 @@ export interface UserProfileData {
 // Allow saving profile data (works for both Firebase users and guests)
 export const GUEST_PROFILE_KEY = 'schemesetu_guest_profile';
 export const GUEST_UID_KEY = 'schemesetu_guest_uid';
+export const GUEST_SAVED_KEY = 'schemesetu_guest_saved';
+export const GUEST_NOTIF_KEY = 'schemesetu_guest_notif';
 
 interface AppContextType {
   currentScreen: Screen;
@@ -73,8 +76,12 @@ interface AppContextType {
   schemes: Scheme[];
   getSchemeById: (id: string) => Scheme | undefined;
 
+  notifications: NotificationData[];
   unreadCount: number;
-  setUnreadCount: (count: number) => void;
+  markAllNotificationsRead: () => void;
+  markNotificationRead: (notifId: string) => void;
+  deleteNotification: (notifId: string) => void;
+  clearAllNotifications: () => void;
 
   isLoading: boolean;
   profileLoading: boolean;
@@ -98,12 +105,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfileData | null>(null);
   const [savedSchemes, setSavedSchemes] = useState<string[]>([]);
-  const [unreadCount, setUnreadCount] = useState(2);
+  const [notifications, setNotifications] = useState<NotificationData[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const authInitDone = useRef(false);
+  const unsubSavedRef = useRef<(() => void) | null>(null);
+  const unsubNotifRef = useRef<(() => void) | null>(null);
+
+  // Derive unread count from notifications
+  useEffect(() => {
+    const count = notifications.filter(n => !n.read).length;
+    setUnreadCount(count);
+  }, [notifications]);
 
   const loadProfile = useCallback(async (uid: string): Promise<UserProfileData | null> => {
     if (!isFirebaseReady()) return null;
@@ -205,12 +221,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         const profile = await loadProfile(currentUser.uid);
         if (profile) setUserProfile(profile);
 
-        try {
-          const bookmarks = await firestore.getUserBookmarks(currentUser.uid);
-          setSavedSchemes(bookmarks);
-        } catch (e) {
-          console.warn('Failed to load bookmarks:', e);
-        }
+        // Set up real-time listeners
+        setupListeners(currentUser.uid);
 
         // ── Everything loaded — navigate and unlock in one batch ──
         authInitDone.current = true;
@@ -252,6 +264,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     return () => {
       unsub();
+      cleanupListeners();
     };
   }, []);
 
@@ -282,6 +295,31 @@ export function AppProvider({ children }: { children: ReactNode }) {
       document.documentElement.classList.remove('dark');
     }
   }, [isDark]);
+
+  // ── Real-time listeners setup ──────────────────────────────────────────
+
+  const setupListeners = useCallback((uid: string) => {
+    // Cleanup previous listeners
+    if (unsubSavedRef.current) unsubSavedRef.current();
+    if (unsubNotifRef.current) unsubNotifRef.current();
+
+    if (!isFirebaseReady()) return;
+
+    // Saved schemes listener
+    unsubSavedRef.current = firestore.listenSavedSchemes(uid, (ids) => {
+      setSavedSchemes(ids);
+    });
+
+    // Notifications listener
+    unsubNotifRef.current = firestore.listenNotifications(uid, (notifs) => {
+      setNotifications(notifs);
+    });
+  }, []);
+
+  const cleanupListeners = useCallback(() => {
+    if (unsubSavedRef.current) { unsubSavedRef.current(); unsubSavedRef.current = null; }
+    if (unsubNotifRef.current) { unsubNotifRef.current(); unsubNotifRef.current = null; }
+  }, []);
 
   const setScreen = (screen: Screen, params?: Record<string, unknown>) => {
     setScreenParams(params || {});
@@ -372,6 +410,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const loginAsGuest = () => {
     const uid = 'guest_' + Date.now();
+    const existingUid = localStorage.getItem(GUEST_UID_KEY);
     localStorage.setItem(GUEST_UID_KEY, uid);
     setUser({
       uid,
@@ -380,6 +419,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
       isGuest: true,
       provider: 'guest',
     });
+
+    // Restore guest saved schemes
+    try {
+      const savedIds = JSON.parse(localStorage.getItem(GUEST_SAVED_KEY) || '[]');
+      if (Array.isArray(savedIds)) setSavedSchemes(savedIds);
+    } catch {}
+
+    // Restore guest notifications
+    try {
+      const savedNotifs = JSON.parse(localStorage.getItem(GUEST_NOTIF_KEY) || '[]');
+      if (Array.isArray(savedNotifs)) setNotifications(savedNotifs);
+    } catch {}
+
     try {
       const saved = localStorage.getItem(GUEST_PROFILE_KEY);
       if (saved) {
@@ -390,7 +442,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
     } catch {}
     setUserProfile({ completedOnboarding: false });
-    setSavedSchemes([]);
     setScreen('onboarding');
   };
 
@@ -434,6 +485,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
+    cleanupListeners();
     try {
       if (isFirebaseReady() && !user?.isGuest) {
         const { signOut } = await import('firebase/auth');
@@ -444,9 +496,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     localStorage.removeItem(GUEST_UID_KEY);
     localStorage.removeItem(GUEST_PROFILE_KEY);
+    localStorage.removeItem(GUEST_SAVED_KEY);
+    localStorage.removeItem(GUEST_NOTIF_KEY);
     setUser(null);
     setUserProfile(null);
     setSavedSchemes([]);
+    setNotifications([]);
     setIsAuthenticated(false);
     setIsAuthLoading(false);
     setScreen('login');
@@ -469,10 +524,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setUserProfile(profile);
 
     if (user && !user.isGuest) {
-      const { saveOnboardingData } = await import('../services/firestoreService');
+      const { saveOnboardingData, generateSmartNotifications } = await import('../services/firestoreService');
       await saveOnboardingData(user.uid, { occupation, profileDetails, completedOnboarding: true });
+      // Generate smart notifications based on profile
+      generateSmartNotifications(user.uid, occupation, profileDetails).catch(() => {});
     } else {
       localStorage.setItem(GUEST_PROFILE_KEY, JSON.stringify(profile));
+      // Generate notifications for guest
+      const newNotif: NotificationData = {
+        id: 'guest_' + Date.now(),
+        type: 'new_match',
+        title: 'Welcome to SchemeSetu!',
+        body: 'Complete your profile to get personalized scheme recommendations.',
+        read: false,
+        createdAt: new Date(),
+        icon: '✨',
+      };
+      setNotifications(prev => [newNotif, ...prev]);
+      localStorage.setItem(GUEST_NOTIF_KEY, JSON.stringify([newNotif]));
     }
 
     setScreen('home');
@@ -482,21 +551,108 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const toggleSave = useCallback(async (schemeId: string) => {
     const isCurrentlySaved = savedSchemes.includes(schemeId);
+    const scheme = getSchemeById(schemeId);
 
+    // Optimistic UI update
     setSavedSchemes(prev =>
       isCurrentlySaved
         ? prev.filter(id => id !== schemeId)
         : [...prev, schemeId]
     );
 
-    if (isFirebaseReady() && user && !user.isGuest) {
-      await firestore.toggleBookmark(user.uid, schemeId);
+    if (user && user.isGuest) {
+      const updated = isCurrentlySaved
+        ? savedSchemes.filter(id => id !== schemeId)
+        : [...savedSchemes, schemeId];
+      localStorage.setItem(GUEST_SAVED_KEY, JSON.stringify(updated));
+
+      // Guest notification on save
+      if (!isCurrentlySaved && scheme) {
+        const newNotif: NotificationData = {
+          id: 'notif_' + Date.now(),
+          type: 'scheme_bookmarked',
+          title: `Saved: ${scheme.name}`,
+          body: 'You have bookmarked this scheme for quick access.',
+          schemeId: scheme.id,
+          schemeName: scheme.name,
+          read: false,
+          createdAt: new Date(),
+          icon: '🔖',
+        };
+        setNotifications(prev => [newNotif, ...prev]);
+        localStorage.setItem(GUEST_NOTIF_KEY, JSON.stringify(
+          [newNotif, ...JSON.parse(localStorage.getItem(GUEST_NOTIF_KEY) || '[]')]
+        ));
+      }
+      return;
     }
-  }, [savedSchemes, user]);
+
+    if (isFirebaseReady() && user) {
+      if (isCurrentlySaved) {
+        await firestore.unsaveScheme(user.uid, schemeId);
+      } else {
+        await firestore.saveScheme(user.uid, schemeId, {
+          category: scheme?.category || '',
+          name: scheme?.name || '',
+          emoji: '',
+        });
+        if (scheme) {
+          await firestore.addNotification(user.uid, {
+            type: 'scheme_bookmarked',
+            title: `Saved: ${scheme.name}`,
+            body: 'You have bookmarked this scheme for quick access.',
+            schemeId: scheme.id,
+            schemeName: scheme.name,
+            icon: '🔖',
+          });
+        }
+      }
+    }
+  }, [savedSchemes, user, getSchemeById, ALL_SCHEMES]);
 
   const isSaved = useCallback((schemeId: string) => {
     return savedSchemes.includes(schemeId);
   }, [savedSchemes]);
+
+  // ── Notification Methods ────────────────────────────────────────────────
+
+  const markAllNotificationsRead = useCallback(async () => {
+    if (user && !user.isGuest && isFirebaseReady()) {
+      await firestore.markAllNotificationsRead(user.uid);
+    } else {
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+      localStorage.setItem(GUEST_NOTIF_KEY, JSON.stringify(
+        notifications.map(n => ({ ...n, read: true }))
+      ));
+    }
+  }, [user, notifications]);
+
+  const markNotificationRead = useCallback(async (notifId: string) => {
+    if (user && !user.isGuest && isFirebaseReady()) {
+      await firestore.markNotificationRead(user.uid, notifId);
+    } else {
+      setNotifications(prev =>
+        prev.map(n => n.id === notifId ? { ...n, read: true } : n)
+      );
+    }
+  }, [user]);
+
+  const deleteNotification = useCallback(async (notifId: string) => {
+    if (user && !user.isGuest && isFirebaseReady()) {
+      await firestore.deleteNotification(user.uid, notifId);
+    } else {
+      setNotifications(prev => prev.filter(n => n.id !== notifId));
+    }
+  }, [user]);
+
+  const clearAllNotifications = useCallback(async () => {
+    if (user && !user.isGuest && isFirebaseReady()) {
+      await firestore.clearAllNotifications(user.uid);
+    } else {
+      setNotifications([]);
+      localStorage.removeItem(GUEST_NOTIF_KEY);
+    }
+  }, [user]);
 
   // ── Scheme Methods ──────────────────────────────────────────────────────
 
@@ -530,8 +686,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
         isSaved,
         schemes: ALL_SCHEMES,
         getSchemeById,
+        notifications,
         unreadCount,
-        setUnreadCount,
+        markAllNotificationsRead,
+        markNotificationRead,
+        deleteNotification,
+        clearAllNotifications,
         isLoading,
         profileLoading,
       }}

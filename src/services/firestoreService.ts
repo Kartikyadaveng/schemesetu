@@ -19,6 +19,7 @@ import {
   documentId,
   serverTimestamp,
   increment,
+  onSnapshot,
   type DocumentSnapshot,
   type QueryDocumentSnapshot,
   type Firestore,
@@ -344,10 +345,10 @@ export async function getCategories(): Promise<CategoryStats[]> {
   }));
 }
 
-// ── Bookmarks ────────────────────────────────────────────────────────────────
+// ── Bookmarks (Legacy) ───────────────────────────────────────────────────────
 
 /**
- * Get all bookmarked scheme IDs for a user
+ * Get all bookmarked scheme IDs for a user (legacy bookmark collection)
  */
 export async function getUserBookmarks(userId: string): Promise<string[]> {
   const db = checkFirebase();
@@ -364,7 +365,7 @@ export async function getUserBookmarks(userId: string): Promise<string[]> {
 }
 
 /**
- * Toggle a bookmark (add if not exists, remove if exists)
+ * Toggle a bookmark (add if not exists, remove if exists) — legacy method
  */
 export async function toggleBookmark(
   userId: string,
@@ -378,16 +379,14 @@ export async function toggleBookmark(
     const bookmarkSnap = await getDoc(bookmarkRef);
 
     if (bookmarkSnap.exists()) {
-      // Remove bookmark
       await deleteDoc(bookmarkRef);
-      return false; // removed
+      return false;
     } else {
-      // Add bookmark
       await setDoc(bookmarkRef, {
         schemeId,
         savedAt: serverTimestamp(),
       });
-      return true; // added
+      return true;
     }
   } catch (err) {
     console.error('Error toggling bookmark:', err);
@@ -415,7 +414,7 @@ export async function isSchemeBookmarked(
 }
 
 /**
- * Get full bookmark scheme objects for a user
+ * Get full bookmark scheme objects for a user (legacy)
  */
 export async function getBookmarkedSchemes(userId: string): Promise<Scheme[]> {
   const db = checkFirebase();
@@ -425,7 +424,6 @@ export async function getBookmarkedSchemes(userId: string): Promise<Scheme[]> {
     const bookmarkIds = await getUserBookmarks(userId);
     if (bookmarkIds.length === 0) return [];
 
-    // Firestore supports 'in' queries with up to 30 items
     const chunks = chunkArray(bookmarkIds, 30);
     const results: Scheme[] = [];
 
@@ -443,6 +441,400 @@ export async function getBookmarkedSchemes(userId: string): Promise<Scheme[]> {
     console.error('Error fetching bookmarked schemes:', err);
     return [];
   }
+}
+
+// ── Saved Schemes (New: users/{userId}/savedSchemes) ────────────────────────
+
+export interface SavedSchemeData {
+  schemeId: string;
+  savedAt: Date;
+  category: string;
+  schemeName: string;
+  schemeEmoji: string;
+}
+
+/**
+ * Save a scheme to user's saved collection
+ */
+export async function saveScheme(
+  userId: string,
+  schemeId: string,
+  scheme: { category: string; name: string; emoji: string }
+): Promise<boolean> {
+  const db = checkFirebase();
+  if (!db) return false;
+
+  try {
+    const ref = doc(db, 'users', userId, 'savedSchemes', schemeId);
+    await setDoc(ref, {
+      schemeId,
+      savedAt: serverTimestamp(),
+      category: scheme.category,
+      schemeName: scheme.name,
+      schemeEmoji: scheme.emoji,
+    });
+    return true;
+  } catch (err) {
+    console.error('Error saving scheme:', err);
+    return false;
+  }
+}
+
+/**
+ * Unsave (remove) a scheme from user's saved collection
+ */
+export async function unsaveScheme(
+  userId: string,
+  schemeId: string
+): Promise<boolean> {
+  const db = checkFirebase();
+  if (!db) return false;
+
+  try {
+    const ref = doc(db, 'users', userId, 'savedSchemes', schemeId);
+    await deleteDoc(ref);
+    return true;
+  } catch (err) {
+    console.error('Error unsaving scheme:', err);
+    return false;
+  }
+}
+
+/**
+ * Get all saved scheme IDs for a user
+ */
+export async function getSavedSchemeIds(userId: string): Promise<string[]> {
+  const db = checkFirebase();
+  if (!db) return [];
+
+  try {
+    const ref = collection(db, 'users', userId, 'savedSchemes');
+    const q = query(ref, orderBy('savedAt', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(d => d.id);
+  } catch (err) {
+    console.error('Error fetching saved scheme IDs:', err);
+    return [];
+  }
+}
+
+/**
+ * Get all saved scheme data (with metadata) for a user
+ */
+export async function getSavedSchemeData(userId: string): Promise<SavedSchemeData[]> {
+  const db = checkFirebase();
+  if (!db) return [];
+
+  try {
+    const ref = collection(db, 'users', userId, 'savedSchemes');
+    const q = query(ref, orderBy('savedAt', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(d => {
+      const data = d.data();
+      return {
+        schemeId: d.id,
+        savedAt: data.savedAt?.toDate ? data.savedAt.toDate() : new Date(),
+        category: data.category || '',
+        schemeName: data.schemeName || '',
+        schemeEmoji: data.schemeEmoji || '📋',
+      };
+    });
+  } catch (err) {
+    console.error('Error fetching saved scheme data:', err);
+    return [];
+  }
+}
+
+/**
+ * Real-time listener for saved scheme IDs
+ */
+export function listenSavedSchemes(
+  userId: string,
+  callback: (ids: string[]) => void
+): () => void {
+  const db = checkFirebase();
+  if (!db) {
+    callback([]);
+    return () => {};
+  }
+
+  const ref = collection(db, 'users', userId, 'savedSchemes');
+  const q = query(ref, orderBy('savedAt', 'desc'));
+  const unsub = onSnapshot(q, (snapshot) => {
+    callback(snapshot.docs.map(d => d.id));
+  }, (err) => {
+    console.error('Error in saved schemes listener:', err);
+    callback([]);
+  });
+  return unsub;
+}
+
+// ── Notifications ────────────────────────────────────────────────────────────
+
+export interface NotificationData {
+  id: string;
+  type: 'new_match' | 'deadline' | 'eligibility_update' | 'application_reminder' | 'scheme_bookmarked' | 'govt_update';
+  title: string;
+  body: string;
+  schemeId?: string;
+  schemeName?: string;
+  read: boolean;
+  createdAt: Date;
+  icon: string;
+}
+
+const NOTIF_ICONS: Record<string, string> = {
+  'new_match': '✨',
+  'deadline': '⏰',
+  'eligibility_update': '📢',
+  'application_reminder': '🔔',
+  'scheme_bookmarked': '🔖',
+  'govt_update': '🏛️',
+};
+
+/**
+ * Add a notification for a user
+ */
+export async function addNotification(
+  userId: string,
+  notif: Omit<NotificationData, 'id' | 'createdAt' | 'read'>
+): Promise<string | null> {
+  const db = checkFirebase();
+  if (!db) return null;
+
+  try {
+    const ref = doc(collection(db, 'users', userId, 'notifications'));
+    await setDoc(ref, {
+      ...notif,
+      read: false,
+      createdAt: serverTimestamp(),
+    });
+    return ref.id;
+  } catch (err) {
+    console.error('Error adding notification:', err);
+    return null;
+  }
+}
+
+/**
+ * Get all notifications for a user (ordered by createdAt desc)
+ */
+export async function getNotifications(userId: string): Promise<NotificationData[]> {
+  const db = checkFirebase();
+  if (!db) return [];
+
+  try {
+    const ref = collection(db, 'users', userId, 'notifications');
+    const q = query(ref, orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(d => {
+      const data = d.data();
+      return {
+        id: d.id,
+        type: data.type || 'govt_update',
+        title: data.title || '',
+        body: data.body || '',
+        schemeId: data.schemeId,
+        schemeName: data.schemeName,
+        read: data.read === true,
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(),
+        icon: data.icon || NOTIF_ICONS[data.type] || '📋',
+      };
+    });
+  } catch (err) {
+    console.error('Error fetching notifications:', err);
+    return [];
+  }
+}
+
+/**
+ * Mark a single notification as read
+ */
+export async function markNotificationRead(
+  userId: string,
+  notifId: string
+): Promise<void> {
+  const db = checkFirebase();
+  if (!db) return;
+
+  try {
+    const ref = doc(db, 'users', userId, 'notifications', notifId);
+    await updateDoc(ref, { read: true });
+  } catch (err) {
+    console.error('Error marking notification read:', err);
+  }
+}
+
+/**
+ * Mark all notifications as read
+ */
+export async function markAllNotificationsRead(userId: string): Promise<void> {
+  const db = checkFirebase();
+  if (!db) return;
+
+  try {
+    const ref = collection(db, 'users', userId, 'notifications');
+    const q = query(ref, where('read', '==', false));
+    const snapshot = await getDocs(q);
+    const batch = snapshot.docs.map(d => updateDoc(d.ref, { read: true }));
+    await Promise.all(batch);
+  } catch (err) {
+    console.error('Error marking all notifications read:', err);
+  }
+}
+
+/**
+ * Delete a notification
+ */
+export async function deleteNotification(
+  userId: string,
+  notifId: string
+): Promise<void> {
+  const db = checkFirebase();
+  if (!db) return;
+
+  try {
+    const ref = doc(db, 'users', userId, 'notifications', notifId);
+    await deleteDoc(ref);
+  } catch (err) {
+    console.error('Error deleting notification:', err);
+  }
+}
+
+/**
+ * Clear all notifications for a user
+ */
+export async function clearAllNotifications(userId: string): Promise<void> {
+  const db = checkFirebase();
+  if (!db) return;
+
+  try {
+    const ref = collection(db, 'users', userId, 'notifications');
+    const snapshot = await getDocs(ref);
+    const batch = snapshot.docs.map(d => deleteDoc(d.ref));
+    await Promise.all(batch);
+  } catch (err) {
+    console.error('Error clearing notifications:', err);
+  }
+}
+
+/**
+ * Real-time listener for notifications
+ */
+export function listenNotifications(
+  userId: string,
+  callback: (notifications: NotificationData[]) => void
+): () => void {
+  const db = checkFirebase();
+  if (!db) {
+    callback([]);
+    return () => {};
+  }
+
+  const ref = collection(db, 'users', userId, 'notifications');
+  const q = query(ref, orderBy('createdAt', 'desc'));
+  const unsub = onSnapshot(q, (snapshot) => {
+    const notifs: NotificationData[] = snapshot.docs.map(d => {
+      const data = d.data();
+      return {
+        id: d.id,
+        type: data.type || 'govt_update',
+        title: data.title || '',
+        body: data.body || '',
+        schemeId: data.schemeId,
+        schemeName: data.schemeName,
+        read: data.read === true,
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(),
+        icon: data.icon || NOTIF_ICONS[data.type] || '📋',
+      };
+    });
+    callback(notifs);
+  }, (err) => {
+    console.error('Error in notifications listener:', err);
+    callback([]);
+  });
+  return unsub;
+}
+
+/**
+ * Generate smart notifications based on profile changes and match results
+ */
+export async function generateSmartNotifications(
+  userId: string,
+  occupation: string | undefined,
+  profileDetails: Record<string, string>,
+): Promise<void> {
+  if (!occupation || !isFirebaseReady()) return;
+
+  try {
+    const { getScoredSchemes } = await import('./schemeService');
+    const scored = await getScoredSchemes(occupation, profileDetails, 50);
+    const perfect = scored.filter(s => s.match.label === 'perfect' || s.match.label === 'high');
+
+    if (perfect.length >= 3) {
+      await addNotification(userId, {
+        type: 'new_match',
+        title: `${perfect.length} High-Match Schemes Found!`,
+        body: `You match ${perfect.length} schemes with ${perfect[0]?.match.score}%+ score. Check them now!`,
+        icon: '✨',
+      });
+    }
+
+    // Deadline reminders — check schemes with approaching deadlines
+    const deadlineSchemes = scored
+      .filter(s => s.match.label === 'perfect' || s.match.label === 'high')
+      .slice(0, 3);
+
+    for (const s of deadlineSchemes) {
+      const deadline = s.scheme.deadline;
+      if (deadline && deadline.toLowerCase() !== 'ongoing' && deadline.toLowerCase() !== 'open') {
+        await addNotification(userId, {
+          type: 'deadline',
+          title: `Deadline Approaching: ${s.scheme.name}`,
+          body: `Apply before ${deadline}. You have a ${s.match.score}% match!`,
+          schemeId: s.scheme.id,
+          schemeName: s.scheme.name,
+          icon: '⏰',
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('Error generating smart notifications:', err);
+  }
+}
+
+// ── Notification helpers ─────────────────────────────────────────────────────
+
+export function getNotificationIcon(type: string): string {
+  return NOTIF_ICONS[type] || '📋';
+}
+
+export function groupNotifications(notifs: NotificationData[]): {
+  today: NotificationData[];
+  week: NotificationData[];
+  earlier: NotificationData[];
+} {
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const weekStart = new Date(todayStart);
+  weekStart.setDate(weekStart.getDate() - 7);
+
+  const today: NotificationData[] = [];
+  const week: NotificationData[] = [];
+  const earlier: NotificationData[] = [];
+
+  for (const n of notifs) {
+    const created = n.createdAt instanceof Date ? n.createdAt : new Date(n.createdAt);
+    if (created >= todayStart) {
+      today.push(n);
+    } else if (created >= weekStart) {
+      week.push(n);
+    } else {
+      earlier.push(n);
+    }
+  }
+
+  return { today, week, earlier };
 }
 
 // ── Users ────────────────────────────────────────────────────────────────────
